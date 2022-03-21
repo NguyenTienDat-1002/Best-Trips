@@ -28,6 +28,7 @@ Route::get('/logout', 'UserController@logout');
 
 Route::get('/register', 'UserController@create');
 
+Route::post('/register', 'UserController@store');
 
 Route::get('/tour/{id}', 'TourController@show');
 
