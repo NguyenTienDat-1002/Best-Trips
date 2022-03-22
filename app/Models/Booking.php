@@ -11,5 +11,5 @@ class Booking extends Model
     protected $table = "Booking";
     protected $primaryKey = "id";
     protected $guarded = [];
-    public $timestamp = false;
+    public $timestamps = false;
 }

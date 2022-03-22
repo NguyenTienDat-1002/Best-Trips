@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Register;
+use App\Models\Users;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -40,7 +42,16 @@ class UserController extends Controller
     {
         //
         $validate = $request->validated();
-        return $validate;
+        $fullname ="{$request->firstname} {$request->lastname}";
+        $user = new Users([
+            'full_name'=> $fullname,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $user->save();
+
+        return redirect(url('/register'))->with('status','successful');
     }
 
     /**

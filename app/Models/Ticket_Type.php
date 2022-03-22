@@ -11,5 +11,5 @@ class Ticket_Type extends Model
     protected $table = "Ticket_Type";
     protected $primaryKey = "id";
     protected $guard = [];
-    public $timestamp = false;
+    public $timestamps = false;
 }

@@ -11,5 +11,5 @@ class Tour_Itinerary extends Model
     protected $table = "Tour_Itinerary";
     protected $primaryKey ="id";
     protected $guarded = [];
-    public $timestamp = false;
+    public $timestamps = false;
 }
