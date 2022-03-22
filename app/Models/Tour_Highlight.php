@@ -11,5 +11,5 @@ class Tour_Highlight extends Model
     protected $table = "Tour_Highlight";
     protected $primaryKey = "id";
     protected $guarded = [];
-    public $timestamp = false;
+    public $timestamps = false;
 }

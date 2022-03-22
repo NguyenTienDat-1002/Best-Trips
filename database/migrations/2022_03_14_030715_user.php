@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('username',50);
             $table->string('password');
             $table->string('full_name');
-            $table->string('role',10);
+            $table->string('role',10)->default('Customer');
         });
     }
 

@@ -11,5 +11,5 @@ class Tour_Review extends Model
     protected $table = "Tour_Review";
     protected $primaryKey = "id";
     protected $guarded = [];
-    public $timestamp = false;
+    public $timestamps = false;
 }

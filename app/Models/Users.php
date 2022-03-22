@@ -11,6 +11,6 @@ class Users extends Authenticatable
     use HasFactory;
     protected $table = "User";
     protected $primaryKey = "id";
-    protected $guardad =[];
-    public $timestamp = false;
+    protected $guarded =[];
+    public $timestamps = false;
 }
