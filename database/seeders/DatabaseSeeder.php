@@ -23,13 +23,10 @@ class DatabaseSeeder extends Seeder
         $this->call(Tour_HighlightTableSeeder::class);
 
         $this->call(Tour_ItineraryTableSeeder::class);
-
-        $this->call(Ticket_TypeTableSeeder::class);
     
         $this->call(BookingTableSeeder::class);
 
-        $this->call(TicketTableSeeder::class);
 
-        $this->call(Tour_ReviewTableSeeder::class);
+
     }
 }
