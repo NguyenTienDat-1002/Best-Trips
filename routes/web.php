@@ -37,3 +37,7 @@ Route::get('/tour/new','TourController@create');
 Route::get('/tour/{id}', 'TourController@show');
 
 Route::get('/tours','TourController@search');
+
+Route::post('/tour/new', 'TourController@store');
+
+Route::view('/test', 'test');

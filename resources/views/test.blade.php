@@ -50,7 +50,7 @@
                             <!-- To make this form functional, sign up at-->
                             <!-- https://startbootstrap.com/solution/contact-forms-->
                             <!-- to get an API token!-->
-                            <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                            <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN" onSubmit="return confirm('Are you sure you want to redeem')">
                                 <!-- Email address input-->
                                 <div class="row">
                                     <div class="col">

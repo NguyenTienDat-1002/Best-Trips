@@ -24,6 +24,12 @@
                                 <i class="bi-cart-fill me-1"></i>
                                 Booking
                             </button>
+                            @if(Auth::check()&&Auth::guard()->user()->role=="Admin")
+                            <button class="btn btn-outline-dark flex-shrink-0" type="button" style="margin-left: 10px">
+                                <i class="bi-cart-fill me-1"></i>
+                                Edit
+                            </button>
+                            @endif
                         </div>
                     </div>
                 </div>
