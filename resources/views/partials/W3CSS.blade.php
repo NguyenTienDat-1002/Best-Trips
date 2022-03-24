@@ -6,6 +6,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{ URL::asset('css/styles.css') }}" rel="stylesheet" />
     <title>Best Trips</title>
+    <link rel="icon" type="image/x-icon" href="{{ URL::asset('assets/favicon.ico') }}" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -13,4 +14,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
     html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
-    </style>
+    .mannual-radius {
+        border-radius:50%;
+    }
+    .mannual-plus {
+  --b:4px; /* the thickness */
+  width:40px; /* the size */
+  aspect-ratio:1/1;
+  border:10px solid #000; /* the outer space */
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#000 90deg,#fff 0) 
+    calc(100% + var(--b)/2) calc(100% + var(--b)/2)/
+    calc(50%  + var(--b))   calc(50%  + var(--b));
+  display:inline-block;
+}
+</style>
+
+    

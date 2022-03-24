@@ -26,6 +26,7 @@ class TourController extends Controller
     public function create()
     {
         //
+        return view('newtour');
     }
 
     /**
@@ -37,6 +38,7 @@ class TourController extends Controller
     public function store(Request $request)
     {
         //
+        return $request->all();
     }
 
     /**
