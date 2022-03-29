@@ -23,6 +23,7 @@ return new class extends Migration
             $table->datetime('departure_time')->nullable();
             $table->string('overview')->nullable();
             $table->string('img')->nullable();
+            $table->integer('sales')->default(0);
         });
     }
 

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Tour;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 class TourController extends Controller
 {
@@ -38,7 +42,25 @@ class TourController extends Controller
     public function store(Request $request)
     {
         //
-        return $request->all();
+        try{
+        DB::beginTransaction()();
+        $tour = Tour::create([
+            'title' => $request->title,
+            'price' => $request->price,
+            'duration' =>$request->duration,
+            'departure_point' => $request->departure,
+            'departure_time' =>$request->time,
+            
+        ]);
+        Storage::disk('local')->put('overview/'.$tour->id.'.txt',$request->overview);
+        $tour->update([
+            'overview' => 'overview/'.$tour->id.'.txt'
+        ]);
+        DB::commit();
+        return redirect()->back();
+        }catch(e){
+            DB::rollback();
+        }
     }
 
     /**
@@ -51,10 +73,13 @@ class TourController extends Controller
     {
         //
         $tour = Tour::findOrFail($id);
-
-        $tours = Tour::all()->random(4);
-
-        return view('tourdetails', ['tour' => $tour, 'tours' => $tours]);
+        $tours= DB::select("select * from tour where price*(100-sales)/100 between {$tour->price}*0.9 And {$tour->price}*1.1" );
+        $tours = Tour::whereBetween('price', [$tour->price *0.9,$tour->price *1.1])->get();
+         if(count($tours)>=4)
+             $tours=$tours->random(4);
+             $overview=Storage::disk('local')->get($tour->overview);
+         return view('tourdetails', ['tour' => $tour, 'tours' => $tours, 
+                     'overview'=>str_replace("\n",'<br>',htmlentities($overview))]);
     }
 
     /**
@@ -89,15 +114,22 @@ class TourController extends Controller
     public function destroy($id)
     {
         //
+        $tour = Tour::where('id',$id);
+        $tour->delete();
+        return redirect(url('/tours'));
     }
 
     public function search(Request $request){
         $tours=Tour::where('title','like', "%{$request->key}%");
         
         if($request->time)
-            $tours->where('departure_time','<',$request->time)->orWhere('departure_time',Null);
+            $tours->where('departure_time','<',$request->time);
 
         return view('tours',['tours'=> $tours->paginate()]);
 
+    }
+
+    public function book(){
+        return view('book');
     }
 }

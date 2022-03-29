@@ -5,7 +5,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Best Trips</title>
-
+    
     <link rel="icon" type="image/x-icon" href="{{ URL::asset('assets/favicon.ico') }}" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
@@ -14,4 +14,5 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{ URL::asset('css/styles.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{URL::asset('splide-3.6.12/dist/css/splide.min.css')}}">
 </head>

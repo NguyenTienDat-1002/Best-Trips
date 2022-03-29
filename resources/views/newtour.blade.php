@@ -10,7 +10,7 @@
         <header class="masthead"  style="background-image: url('{{URL::asset('assets/img/about-bg.jpg')}}')">
             <div class="container position-relative">
                 <div class="row justify-content-center">
-                    <div class="col-xl-6">
+                    <div class="col-xl-12">
                         <div class="text-center text-white">
                             <!-- Page heading-->
                             <!-- Signup form-->
@@ -30,34 +30,35 @@
                                         {{ csrf_field() }}
 
                                         <div class="w3-row-padding">
-                                            <p>
+                                            <p class="w3-third">
                                             <label class="w3-text-grey" for="title">Title</label>
                                               <input class="w3-input w3-border" type="text" id="title" name="title" required>
-                                            <p>
+                                            </p>
+                                            <p class="w3-third">      
+                                               <label class="w3-text-grey" for="price">Price</label>
+                                                    <input class="w3-input w3-border" type="text" id="price" name="price">
+                                            </p>
+
+                                            <p class="w3-third">      
+                                                <label class="w3-text-grey" for="sale">Sale</label>
+                                                     <input class="w3-input w3-border" type="text" id="sale" name="sale">
+                                             </p>
+
                                         </div>
 
                                         <div class="w3-row-padding">
-                                            <p class="w3-half">      
+                                            <p class="w3-third">      
                                                 <label class="w3-text-grey" for="departure">Departure point</label>
                                                 <input class="w3-input w3-border" type="text" required id="departure" name="departure">
                                             </p>
                                 
-                                            <p class="w3-half">      
+                                            <p class="w3-third">      
                                                 <label class="w3-text-grey" for="time">time</label>
                                                 <input class="w3-input w3-border" type="datetime-local" id="time" name="time">
                                             </p>
-                                
-                                        </div>
-                                
-                                        <div class="w3-row-padding">
-                                            <p class="w3-half">      
+                                            <p class="w3-third">      
                                                 <label class="w3-text-grey" for="duration">Duration</label>
                                                 <input class="w3-input w3-border" id="duration" name="duration" type="text" required>
-                                            </p>
-                                
-                                            <p class="w3-half">      
-                                                <label class="w3-text-grey" for="price">Price</label>
-                                                <input class="w3-input w3-border" type="text" id="price" name="price">
                                             </p>
                                         </div>
                                 
@@ -68,24 +69,44 @@
                                         
                                         <div class="w3-row-padding">
                                             <p id="iternaries">
-                                            <label class="w3-text-grey" for="address">Address</label>
+                                            <label class="w3-text-grey" for="address">Iternary</label>
                                               <input class="w3-input w3-border" type="text" id="iternary" name="iternaries[]" >
                                             </p>
-                                            <div class="mannual-plus mannual-radius" onclick="add_Iternary()">
+                                            <div style="
+                                            --b:4px; /* the thickness */
+                                            width:40px; /* the size */
+                                            aspect-ratio:1/1;
+                                            border:10px solid #000; /* the outer space */
+                                            background:
+                                              conic-gradient(from 90deg at var(--b) var(--b),#000 90deg,#fff 0) 
+                                              calc(100% + var(--b)/2) calc(100% + var(--b)/2)/
+                                              calc(50%  + var(--b))   calc(50%  + var(--b));
+                                            display:inline-block;" onclick="add_Iternary()">
                                             </div>
-                                        </div>
-                            
-                                        <div class="w3-row-padding">
-                                            <p>      
-                                                <label class="w3-text-grey" for="description">Description</label>
-                                                <textarea class="w3-input w3-border" id="description" rows="6" name="description" style="resize:none" ></textarea>
-                                            </p>
                                         </div>
                                 
                                         <div class="w3-row-padding">
+                                            <p id="highlight">      
+                                                <label class="w3-text-grey" >High light</label>
+                                                <input class="w3-input w3-border" type="file"  name="hightlight[]"/>
+                                                <div style="
+                                            --b:4px; /* the thickness */
+                                            width:40px; /* the size */
+                                            aspect-ratio:1/1;
+                                            border:10px solid #000; /* the outer space */
+                                            background:
+                                              conic-gradient(from 90deg at var(--b) var(--b),#000 90deg,#fff 0) 
+                                              calc(100% + var(--b)/2) calc(100% + var(--b)/2)/
+                                              calc(50%  + var(--b))   calc(50%  + var(--b));
+                                            display:inline-block;" onclick="add_Highlight()">
+                                            </div>
+                                            </p>
+                                        </div>
+
+                                        <div class="w3-row-padding">
                                             <p>      
                                                 <label class="w3-text-grey" for="requirement">Overview</label>
-                                                <textarea class="w3-input w3-border" id="requirement" rows="6" name="requirement" style="resize:none" ></textarea>
+                                                <textarea class="w3-input w3-border" id="requirement" rows="6" name="overview" style="resize:none" ></textarea>
                                             </p>
                                         </div>
                                     @php
@@ -104,6 +125,7 @@
                 </div>
             </div>
         </header>
+        <x-footer/>
         <!-- Footer-->
         @includeIf('partials.scriptjs')
         

@@ -13,12 +13,16 @@
                         <div class="small mb-1">SKU: BST-{{$tour->id}}</div>
                         <h1 class="display-5 fw-bolder">{{$tour->title}}</h1>
                         <div class="fs-5 mb-5">
-                            <span class="text-decoration-line-through"></span>
+                            @if($tour->sales!=0)
+                                <span class="text-decoration-line-through">{{$tour->price}}</span>
+                                <span>${{$tour->price*(100-$tour->sales)/100}}</span>
+                            @else
                             <span>${{$tour->price}}</span>
+                            @endif
                         </div>
                         <p class="lead">Duration: {{$tour->duration}}</p>
                         <p class="lead">Departure point: {{$tour->departure_point}}</p>
-                        <p class="lead">Departure time: {{$tour->time}}</p>
+                        <p class="lead">Departure time: {{$tour->departure_time}}</p>
                         <div class="d-flex">
                             <button class="btn btn-outline-dark flex-shrink-0" type="button">
                                 <i class="bi-cart-fill me-1"></i>
@@ -35,7 +39,9 @@
                 </div>
             </div>
             <div class="container px-4 px-lg-5 my-5">
-                <p class="lead">Departure time: {{$tour->time}}</p>
+                <p class="lead"><h1>Overview:</h1> 
+                    {{$overview}}
+                </p>
             </div>
         </section>
         
