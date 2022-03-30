@@ -37,7 +37,7 @@
         </header>
         <!-- Main Content-->
         <div id="thumbnail-slider" class="splide">
-         
+        </div>
         <!-- Footer-->
         <x-footer/>
         @includeIf('partials.scriptjs')

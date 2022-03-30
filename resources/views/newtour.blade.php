@@ -36,12 +36,12 @@
                                             </p>
                                             <p class="w3-third">      
                                                <label class="w3-text-grey" for="price">Price</label>
-                                                    <input class="w3-input w3-border" type="text" id="price" name="price">
+                                                    <input class="w3-input w3-border" type="text" id="price" name="price" value="0">
                                             </p>
 
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="sale">Sale</label>
-                                                     <input class="w3-input w3-border" type="text" id="sale" name="sale">
+                                                    <input class="w3-input w3-border" type="text" id="sale" name="sale" value="0">
                                              </p>
 
                                         </div>

@@ -2,7 +2,7 @@
     <div class="card h-100">
         <!-- Product image-->
         @if($tour->sales!=0)
-            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">{{$tour->sales}}% Sale</div>
         @endif
         <img class="card-img-top" src="{{$tour->img}}" alt="{{$tour->title}}" />
         <!-- Product details-->
@@ -23,12 +23,12 @@
         
         @if(Auth::check()&&Auth::guard()->user()->role == "Admin")
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
-            <div class="text-center"  style="display: inline-block"><a class="btn btn-outline-dark mt-auto" href="{{ url("/tour/{$tour->id}")}}">View</a></div>
+            <div class="text-center"  style="display: inline-block"><a class="btn btn-outline-dark mt-auto" target="_blank" href="{{ url("/tour/{$tour->id}")}}">View</a></div>
             <div class="text-center "  style="display: inline-block"><a class="btn btn-outline-dark mt-auto" onClick = "return confirm('are you sure?')" href="{{ url('/tour/delete/'.$tour->id)}}">Delete</a></div>
         </div>
         @else
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
-            <div class="text-center"  style="display: inline-block"><a class="btn btn-outline-dark mt-auto" href="{{ url("/tour/{$tour->id}")}}">View options</a></div>
+            <div class="text-center"  style="display: inline-block"><a class="btn btn-outline-dark mt-auto" target="_blank" href="{{ url("/tour/{$tour->id}")}}">View options</a></div>
         </div>
         @endif
     </div>

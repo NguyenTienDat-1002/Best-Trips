@@ -48,12 +48,14 @@
         <!-- Related items section-->
         <section class="py-5 bg-light">
             <div class="container px-4 px-lg-5 mt-5">
+                @if($tours)
                 <h2 class="fw-bolder mb-4">Other tours:</h2>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    @foreach ($tours as $i )
-                        <x-tour-item :tour="$i"/>
+                    @foreach ($tours as $i=>$value )
+                        <x-tour-item :tour="$value"/>
                     @endforeach
                 </div>
+                @endif
             </div>
         </section>
         
