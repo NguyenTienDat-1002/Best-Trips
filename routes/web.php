@@ -39,8 +39,8 @@ Route::post('/register', 'UserController@store');
 Route::get('/tour/new','TourController@create');
 Route::post('/tour/new', 'TourController@store');
 
-Route::get('/tour/edit/{id}', 'TourController@edit');
-Route::post('/tour/update/{id}', 'TourController@update');
+Route::get('/tour/edit/{id}', 'TourController@edit')->name('editTour');
+Route::post('/tour/update/{id}', 'TourController@update')->name('updateTour');
 
 Route::get('/tour/delete/{id}','TourController@destroy');
 
@@ -54,6 +54,3 @@ Route::get('/tours','TourController@search');
 
 
 
-
-
-Route::view('/test', 'test');

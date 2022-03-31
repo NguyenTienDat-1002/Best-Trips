@@ -23,25 +23,25 @@
                             <!-- to get an API token!-->
                             <div class="post w3-container ">
                                     <div class="w3-container w3-teal">
-                                        <center><h2>New Tour</h2></center>
+                                        <center><h2>Update Tour</h2></center>
                                     </div>
                                  
-                                    <form class="w3-container w3-card-4 w3-light-grey"  enctype="multipart/form-data" action="{{url('/tour/new')}}" method="post" > 
+                                    <form class="w3-container w3-card-4 w3-light-grey"  enctype="multipart/form-data" action="" method="post" > 
                                         {{ csrf_field() }}
 
                                         <div class="w3-row-padding">
                                             <p class="w3-third">
                                             <label class="w3-text-grey" for="title">Title</label>
-                                              <input class="w3-input w3-border" type="text" id="title" name="title" required>
+                                              <input class="w3-input w3-border" type="text" id="title" name="title" value={{$tour->title}} required>
                                             </p>
                                             <p class="w3-third">      
                                                <label class="w3-text-grey" for="price">Price</label>
-                                                    <input class="w3-input w3-border" type="text" id="price" name="price" value="0">
+                                                    <input class="w3-input w3-border" type="text" id="price" name="price" value="{{$tour->price}}">
                                             </p>
 
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="sale">Sale</label>
-                                                    <input class="w3-input w3-border" type="text" id="sale" name="sale" value="0">
+                                                    <input class="w3-input w3-border" type="text" id="sale" name="sale" value="{{$tour->sales}}">
                                              </p>
 
                                         </div>
@@ -49,16 +49,16 @@
                                         <div class="w3-row-padding">
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="departure">Departure point</label>
-                                                <input class="w3-input w3-border" type="text" required id="departure" name="departure">
+                                                <input class="w3-input w3-border" type="text" required id="departure" value="{{$tour->departure_point}}" name="departure">
                                             </p>
                                 
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="time">time</label>
-                                                <input class="w3-input w3-border" type="datetime-local" id="time" name="time">
+                                                <input class="w3-input w3-border" type="datetime-local" id="time" name="time" value="{{$tour->departure_time}}">
                                             </p>
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="duration">Duration</label>
-                                                <input class="w3-input w3-border" id="duration" name="duration" type="text" required>
+                                                <input class="w3-input w3-border" id="duration" name="duration" type="text" value="{{$tour->duration}}" required>
                                             </p>
                                         </div>
                                 
@@ -112,13 +112,13 @@
                                         <div class="w3-row-padding">
                                             <p>      
                                                 <label class="w3-text-grey" for="requirement">Overview</label>
-                                                <textarea class="w3-input w3-border" id="requirement" rows="6" name="overview" style="resize:none" ></textarea>
+                                                <textarea class="w3-input w3-border" id="requirement" rows="6" name="overview" value="{{$overview}}" style="resize:none" ></textarea>
                                             </p>
                                         </div>
                                         <div class="w3-row-padding">
                                             <p>      
                                                 <label class="w3-text-grey" for="description">Description</label>
-                                                <textarea class="w3-input w3-border" id="description" rows="6" name="description" style="resize:none" ></textarea>
+                                                <textarea class="w3-input w3-border" id="description" rows="6" name="description" value="{{$description}}" style="resize:none" ></textarea>
                                             </p>
                                         </div>
                                     @php

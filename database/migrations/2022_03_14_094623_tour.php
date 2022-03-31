@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('overview')->nullable();
             $table->string('img')->nullable();
             $table->integer('sales')->default(0);
+            $table->string('video')->nullable();
+            $table->string('description')->nullable();
         });
     }
 

@@ -36,8 +36,30 @@
             </div>
         </header>
         <!-- Main Content-->
-        <div id="thumbnail-slider" class="splide">
-        </div>
+        <section class=" bg-light" style=" padding-top: 3rem ">
+            <div class="container px-4 px-lg-5">
+                @if($lowest)
+                <h2 class="fw-bolder mb-4">Lowest price:</h2>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    @foreach ($lowest as $i=>$value )
+                        <x-tour-item :tour="$value"/>
+                    @endforeach
+                </div>
+                @endif
+            </div>
+        </section>
+        <section class=" bg-light">
+            <div class="container px-4 px-lg-5">
+                @if($bigSale)
+                <h2 class="fw-bolder mb-4">Big Sale:</h2>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    @foreach ($bigSale as $i=>$value )
+                        <x-tour-item :tour="$value"/>
+                    @endforeach
+                </div>
+                @endif
+            </div>
+        </section>
         <!-- Footer-->
         <x-footer/>
         @includeIf('partials.scriptjs')

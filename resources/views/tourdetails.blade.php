@@ -22,17 +22,17 @@
                         </div>
                         <p class="lead">Duration: {{$tour->duration}}</p>
                         <p class="lead">Departure point: {{$tour->departure_point}}</p>
-                        <p class="lead">Departure time: {{$tour->departure_time}}</p>
+                        <p class="lead">Departure time: {{date('h:i d/m/Y',strtotime($tour->departure_time))}}</p>
                         <div class="d-flex">
                             <button class="btn btn-outline-dark flex-shrink-0" type="button">
                                 <i class="bi-cart-fill me-1"></i>
                                 Booking
                             </button>
                             @if(Auth::check()&&Auth::guard()->user()->role=="Admin")
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button" style="margin-left: 10px">
+                            <a class="btn btn-outline-dark flex-shrink-0" type="button" href="{{route('editTour',['id'=>$tour->id])}}"style="margin-left: 10px">
                                 <i class="bi-cart-fill me-1"></i>
                                 Edit
-                            </button>
+                            </a>
                             @endif
                         </div>
                     </div>
@@ -40,7 +40,20 @@
             </div>
             <div class="container px-4 px-lg-5 my-5">
                 <p class="lead"><h1>Overview:</h1> 
-                    {{$overview}}
+                    {!!$overview!!}
+                </p>
+            </div>
+            <div class="container px-4 px-lg-5 my-5">
+                <p class="lead"><h1>Video:</h1> 
+                    <center><video controls>
+                        <source src="{{$tour->video}}" type="video/{{pathinfo($tour->video, PATHINFO_EXTENSION);}}">
+                      Your browser does not support the video tag.
+                    </video></center>
+                </p>
+            </div>
+            <div class="container px-4 px-lg-5 my-5">
+                <p class="lead"><h1>Description:</h1> 
+                    {!!$description!!}
                 </p>
             </div>
         </section>

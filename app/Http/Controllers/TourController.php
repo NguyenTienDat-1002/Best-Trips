@@ -44,24 +44,34 @@ class TourController extends Controller
     {
         //
         try{
-        DB::beginTransaction();
-        $tour = Tour::create([
-            'title' => $request->title,
-            'price' => $request->price,
-            'duration' =>$request->duration,
-            'departure_point' => $request->departure,
-            'departure_time' =>$request->time,
-            'sales' => $request->sale,
-        ]);
-        Storage::disk('local')->put('overview/'.$tour->id.'.txt',$request->overview);
-        $tour->update([
-            'overview' => 'overview/'.$tour->id.'.txt',
-            'img'=>'http://127.0.0.1:8000/storage/'.$request->file('img')->storeAs('tours/img', $tour->id.'.'.$request->file('img')->getClientOriginalExtension(), 'public'),
-        ]);
-        DB::commit();
-        return redirect()->back();
+            DB::beginTransaction();
+    
+            $tour = Tour::create([
+                'title' => $request->title,
+                'price' => $request->price,
+                'duration' =>$request->duration,
+                'departure_point' => $request->departure,
+                'departure_time' =>$request->time,
+                'sales' => $request->sale,
+    
+            ]);
+            Storage::disk('local')->put('overview/'.$tour->id.'.txt',$request->overview);
+            Storage::disk('local')->put('description/'.$tour->id.'.txt',$request->description);
+    
+            $tour->update([
+                'overview' => 'overview/'.$tour->id.'.txt',
+                'description' => 'description/'.$tour->id.'.txt',
+                'img'=>'http://127.0.0.1:8000/storage/'.$request->file('img')->storeAs('tours/img', $tour->id.'.'.$request->file('img')->getClientOriginalExtension(), 'public'),
+                'video'=>'http://127.0.0.1:8000/storage/'.$request->file('video')->storeAs('tours/video', $tour->id.'.'.$request->file('video')->getClientOriginalExtension(), 'public'),
+            ]);
+    
+            DB::commit();
+
+            return redirect()->back();
+
         }catch(e){
             DB::rollback();
+            return redirect()->back();
         }
     }
 
@@ -76,14 +86,20 @@ class TourController extends Controller
         //
         $tour = Tour::findOrFail($id);
         //$tours= DB::select("select * from tour where price*(100-sales)/100 between {$tour->price}*0.9 And {$tour->price}*1.1" );
-        $tours = Tour::whereBetween('price', [$tour->price *0.9,$tour->price *1.1])->where('id',"!=",$tour->id)->get();
-         if(count($tours)>=4)
+        //$tours = Tour::whereBetween('price', [$tour->price *0.9,$tour->price *1.1])->where('id',"!=",$tour->id)->get();
+        $tours = Tour::select('*')->where('id',"!=",$tour->id)->whereRaw("price*(100-sales)/100 between {$tour->price}*0.9 And {$tour->price}*1.1")->get();
+        
+        if($tours->count()>=4)
             $tours=$tours->random(4); 
-        $overview=Storage::disk('local')->get($tour->overview);
-         return view('tourdetails', ['tour' => $tour, 'tours' => $tours, 
-                     'overview'=>str_replace("\n",'<br>',htmlentities($overview))]);
-    }
 
+        $overview=Storage::disk('local')->get($tour->overview);
+        $description=Storage::disk('local')->get($tour->description);
+
+         return view('tourdetails', ['tour' => $tour, 'tours' => $tours, 
+                     'overview'=>str_replace("\n",'<br>',$overview), 
+                     'description'=>str_replace("\n",'<br>',$description)]);
+    }
+// str_replace("\n",'<br>',htmlentities($description))||str_replace("\n",'<br>',htmlentities($overview))
     /**
      * Show the form for editing the specified resource.
      *
@@ -93,6 +109,14 @@ class TourController extends Controller
     public function edit($id)
     {
         //
+        $tour = Tour::findOrFail( $id);
+        
+        $overview=Storage::disk('local')->get($tour->overview);
+        $description=Storage::disk('local')->get($tour->description);
+
+        return view('editTour')->with(['tour' => $tour, 
+        'overview'=>str_replace("\n",'<br>',$overview), 
+        'description'=>str_replace("\n",'<br>',$description)]);
     }
 
     /**
@@ -105,6 +129,7 @@ class TourController extends Controller
     public function update(Request $request, $id)
     {
         //
+        
     }
 
     /**
@@ -123,10 +148,9 @@ class TourController extends Controller
 
     public function search(Request $request){
         $tours=Tour::where('title','like', "%{$request->key}%");
-        
         if($request->time)
             $tours->where('departure_time','>',$request->time);
-
+        
         return view('tours',['tours'=> $tours->paginate()]);
 
     }

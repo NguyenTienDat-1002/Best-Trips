@@ -17,8 +17,7 @@ return new class extends Migration
         Schema::create('Tour_Itinerary', function(Blueprint $table){
             $table->increments('id');
             $table->integer('tour_id')->unsigned();
-            $table->string('name');
-            $table->string('description');
+            $table->string('mark');
             $table->foreign('tour_id')->references('id')->on('Tour');
         });
     }
