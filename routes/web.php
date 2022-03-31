@@ -36,15 +36,25 @@ Route::post('/register', 'UserController@store');
 
 // Tour route
 
-Route::get('/tour/new','TourController@create');
-Route::post('/tour/new', 'TourController@store');
+Route::middleware('admin')->group(function(){
 
-Route::get('/tour/edit/{id}', 'TourController@edit')->name('editTour');
-Route::post('/tour/update/{id}', 'TourController@update')->name('updateTour');
+    Route::get('/tour/new','TourController@create');
 
-Route::get('/tour/delete/{id}','TourController@destroy');
+    Route::post('/tour/new', 'TourController@store');
 
-Route::get('/tour/{id}/book','TourController@book');
+    Route::get('/tour/edit/{id}', 'TourController@edit')->name('editTour');
+
+    Route::post('/tour/update/{id}', 'TourController@update')->name('updateTour');
+    
+    Route::get('/tour/delete/{id}','TourController@destroy');
+});
+
+
+Route::middleware('customer')->group(function(){
+
+    Route::get('/tour/{id}/book','TourController@book');
+
+});
 
 Route::get('/tour/{id}', 'TourController@show');
 
