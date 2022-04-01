@@ -9,6 +9,7 @@ use Illuminate\Http\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use App\Models\Province;
 
 class TourController extends Controller
 {
@@ -31,7 +32,8 @@ class TourController extends Controller
     public function create()
     {
         //
-        return view('newtour');
+        $provinces=Province::all();
+        return view('newtour')->with('provinces',$provinces);
     }
 
     /**
@@ -114,9 +116,12 @@ class TourController extends Controller
         $overview=Storage::disk('local')->get($tour->overview);
         $description=Storage::disk('local')->get($tour->description);
 
+        $provinces=Province::all();
+
         return view('editTour')->with(['tour' => $tour, 
         'overview'=>str_replace("\n",'<br>',$overview), 
-        'description'=>str_replace("\n",'<br>',$description)]);
+        'description'=>str_replace("\n",'<br>',$description),
+        'provinces'=>$provinces]);
     }
 
     /**

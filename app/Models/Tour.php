@@ -12,4 +12,8 @@ class Tour extends Model
     protected $primaryKey ="id";
     protected $guarded = [];
     public $timestamps = false;
+
+    public function province(){
+        return $this->belongsTo('App\Models\Province','departure_point','id');
+    }
 }

@@ -49,7 +49,17 @@
                                         <div class="w3-row-padding">
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="departure">Departure point</label>
-                                                <input class="w3-input w3-border" type="text" required id="departure" value="{{$tour->departure_point}}" name="departure">
+                                                {{-- <input class="w3-input w3-border" type="text" required id="departure" value="{{$tour->departure_point}}" name="departure"> --}}
+                                                <select name="departure" id="departure"  class="w3-input w3-border">
+                                                    
+                                                    @foreach ($provinces as $province )
+                                                        @if($tour->departure_point==$province->id)
+                                                            <option value="{{$province->id}}" selected>{{$province->province}}</option>
+                                                        @else
+                                                            <option value="{{$province->id}}">{{$province->province}}</option>
+                                                        @endif
+                                                    @endforeach
+                                            </select>
                                             </p>
                                 
                                             <p class="w3-third">      

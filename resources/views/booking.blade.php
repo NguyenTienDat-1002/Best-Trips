@@ -33,7 +33,7 @@
 					<div class="booking-form">
 						<form>
 							<div class="form-group">
-								<h1 style="color: white">Booking: SKU: BST-{{$tour->id}} {{$tour->title}} Departure: {{$tour->departure_point}}</h1>
+								<h1 style="color: white">Booking: SKU: BST-{{$tour->id}} {{$tour->title}} Departure: {{$tour->province->province}}</h1>
 							</div>
 							<div class="row">
 								<div class="col-md-6">

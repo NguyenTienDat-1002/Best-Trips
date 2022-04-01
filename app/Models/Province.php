@@ -12,6 +12,9 @@ class Province extends Model
     protected $primaryKey = "id";
     protected $guarded = [];
     public $timestamps = false;
-
+    
+    public function tours(){
+        return $this->hasMany('App\Models\Tour','departure_point','id');
+    }
 
 }
