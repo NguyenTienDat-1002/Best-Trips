@@ -58,7 +58,7 @@ Route::middleware('customer')->group(function(){
 
 });
 
-Route::get('/tour/{id}', 'TourController@show');
+Route::get('/tour/{id}', 'TourController@show')->name('tourDetails');
 
 Route::get('/tours','TourController@search');
 
