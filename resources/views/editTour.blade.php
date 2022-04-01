@@ -122,13 +122,13 @@
                                         <div class="w3-row-padding">
                                             <p>      
                                                 <label class="w3-text-grey" for="requirement">Overview</label>
-                                                <textarea class="w3-input w3-border" id="requirement" rows="6" name="overview" value="{{$overview}}" style="resize:none" ></textarea>
+                                                <textarea class="w3-input w3-border" id="requirement" rows="6" name="overview" style="resize:none" >{{$overview}}</textarea>
                                             </p>
                                         </div>
                                         <div class="w3-row-padding">
                                             <p>      
                                                 <label class="w3-text-grey" for="description">Description</label>
-                                                <textarea class="w3-input w3-border" id="description" rows="6" name="description" value="{{$description}}" style="resize:none" ></textarea>
+                                                <textarea class="w3-input w3-border" id="description" rows="6" name="description"  style="resize:none" >{{$description}}</textarea>
                                             </p>
                                         </div>
                                     @php
@@ -138,7 +138,7 @@
                                     @if(session('notification'))
                                         <center><p style="color:green">{{ session('notification')}}</p></center>
                                     @endif
-                                      <center><p><input type="submit" class="w3-btn w3-padding w3-teal" style="width:120px" name="submit" value="Create"></p></center>
+                                      <center><p><input type="submit" class="w3-btn w3-padding w3-teal" style="width:120px" name="submit" value="Update"></p></center>
                                 </form>
                                     
                             </div>
