@@ -49,7 +49,12 @@
                                         <div class="w3-row-padding">
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="departure">Departure point</label>
-                                                <input class="w3-input w3-border" type="text" required id="departure" name="departure">
+                                                {{-- <input class="w3-input w3-border" type="text" required id="departure" name="departure"> --}}
+                                                <select name="departure" id="departure" class="w3-input w3-border" required>
+                                                    @foreach ($provinces as $provinces )
+                                                        <option value="{{$provinces->id}}">{{$provinces->province}}</option>
+                                                    @endforeach  
+                                                </select>
                                             </p>
                                 
                                             <p class="w3-third">      

@@ -17,15 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call(UserTableSeeder::class);
-
-        $this->call(TourTableSeeder::class);
-
-        $this->call(Tour_HighlightTableSeeder::class);
-
-        $this->call(Tour_ItineraryTableSeeder::class);
-    
-        $this->call(BookingTableSeeder::class);
-
+        $this->call(ProvinceTableSeeder::class);
 
 
     }

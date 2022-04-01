@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <x-header/>
+   <x-header/>
 </head>
     <body>
         <!-- Navigation-->
@@ -23,7 +23,7 @@
                             @endif
                         </div>
                         <p class="lead">Duration: {{$tour->duration}}</p>
-                        <p class="lead">Departure point: {{$tour->departure_point}}</p>
+                        <p class="lead">Departure point: {{$tour->province->province}}</p>
                         <p class="lead">Departure time: {{date('d/m/Y',strtotime($tour->departure_date))}}</p>
                         <div class="d-flex">
                             <a class="btn btn-outline-dark flex-shrink-0" type="button" href="{{URL::asset(route('tour.book',['id'=>$tour->id]))}}">
@@ -60,6 +60,9 @@
             </div>
         </section>
         
+          
+                
+            
         <!-- Related items section-->
         <section class="py-5 bg-light">
             <div class="container px-4 px-lg-5 mt-5">
@@ -75,7 +78,6 @@
         </section>
         
         <!-- Footer-->
-        <x-footer/>
         @includeIf('partials.scriptjs')
     </body>
 </html>
