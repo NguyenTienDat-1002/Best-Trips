@@ -18,6 +18,11 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('tour_id')->unsigned();
+            $table->string('phone');
+            $table->string('email');
+            $table->string('address');
+            $table->integer('adult')->unsigned();
+            $table->integer('children')->unsigned();
             $table->foreign('user_id')->references('id')->on('User');
             $table->foreign('tour_id')->references('id')->on('Tour');
         });

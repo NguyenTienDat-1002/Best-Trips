@@ -61,7 +61,8 @@ Route::get('/tour/{id}', 'TourController@show');
 
 Route::get('/tours','TourController@search');
 
+Route::get('/test', 'testsessionController@test');
 
-
+Route::get('/result','testsessionController@result');
 
 

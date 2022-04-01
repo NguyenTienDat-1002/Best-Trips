@@ -160,4 +160,6 @@ class TourController extends Controller
 
         return view('booking',['tour'=>$tour[0]]);
     }
+
+    
 }
