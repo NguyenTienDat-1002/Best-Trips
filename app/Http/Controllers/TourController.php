@@ -45,13 +45,13 @@ class TourController extends Controller
         //
         try{
             DB::beginTransaction();
-    
+           
             $tour = Tour::create([
                 'title' => $request->title,
                 'price' => $request->price,
                 'duration' =>$request->duration,
                 'departure_point' => $request->departure,
-                'departure_time' =>$request->time,
+                'departure_date' =>$request->time,
                 'sales' => $request->sale,
     
             ]);
@@ -149,13 +149,15 @@ class TourController extends Controller
     public function search(Request $request){
         $tours=Tour::where('title','like', "%{$request->key}%");
         if($request->time)
-            $tours->where('departure_time','>',$request->time);
+            $tours->where('departure_date','>',$request->time);
         
         return view('tours',['tours'=> $tours->paginate()]);
 
     }
 
-    public function book(){
-        return view('book');
+    public function book($id){
+        $tour=Tour::where('id', $id)->get();
+
+        return view('booking',['tour'=>$tour[0]]);
     }
 }

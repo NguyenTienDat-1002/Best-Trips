@@ -52,7 +52,8 @@ Route::middleware('admin')->group(function(){
 
 Route::middleware('customer')->group(function(){
 
-    Route::get('/tour/{id}/book','TourController@book');
+    Route::get('/tour/{id}/book','TourController@book')->name('tour.book');
+    Route::post('/tour/{id}/book','TourController@payment');
 
 });
 

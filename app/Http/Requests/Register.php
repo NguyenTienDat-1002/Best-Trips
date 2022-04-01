@@ -24,8 +24,7 @@ class Register extends FormRequest
     public function rules()
     {
         return [
-            'firstname'=> 'required|string|max:100',
-            'lastname'=> 'required|string|max:100',
+            'fullname'=> 'required|string|max:100',
             'username'=> 'required|unique:User,username|max:50',
             'password'=> 'required|string|min:8|max:32|regex:{^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}$}',
             'repassword'=> 'required|string|min:8|max:32|same:password',

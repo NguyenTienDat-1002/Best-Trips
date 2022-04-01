@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
     <x-header/>
+</head>
     <body>
         <!-- Navigation-->
         <x-navbar />

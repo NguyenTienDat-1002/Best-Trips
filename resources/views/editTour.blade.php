@@ -26,7 +26,7 @@
                                         <center><h2>Update Tour</h2></center>
                                     </div>
                                  
-                                    <form class="w3-container w3-card-4 w3-light-grey"  enctype="multipart/form-data" action="" method="post" > 
+                                    <form class="w3-container w3-card-4 w3-light-grey"  enctype="multipart/form-data" action="{{route('updateTour',['id'=>$tour->id])}}" method="post" > 
                                         {{ csrf_field() }}
 
                                         <div class="w3-row-padding">
@@ -54,7 +54,7 @@
                                 
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="time">time</label>
-                                                <input class="w3-input w3-border" type="datetime-local" id="time" name="time" value="{{$tour->departure_time}}">
+                                                <input class="w3-input w3-border" type="date" id="time" name="time" value="{{$tour->departure_date}}">
                                             </p>
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="duration">Duration</label>

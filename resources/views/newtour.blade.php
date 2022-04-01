@@ -54,7 +54,7 @@
                                 
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="time">time</label>
-                                                <input class="w3-input w3-border" type="datetime-local" id="time" name="time">
+                                                <input class="w3-input w3-border" type="date" id="time" name="time">
                                             </p>
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="duration">Duration</label>

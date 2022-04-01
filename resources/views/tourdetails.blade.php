@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
     <x-header/>
+</head>
     <body>
         <!-- Navigation-->
         <x-navbar/>
@@ -22,12 +24,12 @@
                         </div>
                         <p class="lead">Duration: {{$tour->duration}}</p>
                         <p class="lead">Departure point: {{$tour->departure_point}}</p>
-                        <p class="lead">Departure time: {{date('h:i d/m/Y',strtotime($tour->departure_time))}}</p>
+                        <p class="lead">Departure time: {{date('d/m/Y',strtotime($tour->departure_date))}}</p>
                         <div class="d-flex">
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <a class="btn btn-outline-dark flex-shrink-0" type="button" href="{{URL::asset(route('tour.book',['id'=>$tour->id]))}}">
                                 <i class="bi-cart-fill me-1"></i>
                                 Booking
-                            </button>
+                            </a>
                             @if(Auth::check()&&Auth::guard()->user()->role=="Admin")
                             <a class="btn btn-outline-dark flex-shrink-0" type="button" href="{{route('editTour',['id'=>$tour->id])}}"style="margin-left: 10px">
                                 <i class="bi-cart-fill me-1"></i>

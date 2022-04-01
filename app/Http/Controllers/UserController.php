@@ -42,9 +42,8 @@ class UserController extends Controller
     {
         //
         $validate = $request->validated();
-        $fullname ="{$request->firstname} {$request->lastname}";
         $user = new Users([
-            'full_name'=> $fullname,
+            'full_name'=> $request->fullname,
             'username' => $request->username,
             'password' => Hash::make($request->password),
         ]);

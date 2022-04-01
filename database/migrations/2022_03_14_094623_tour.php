@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('price',6,2)->nullable();
             $table->integer('duration')->nullable();
             $table->string('departure_point')->nullable();
-            $table->datetime('departure_time')->nullable();
+            $table->date('departure_date')->nullable();
             $table->string('overview')->nullable();
             $table->string('img')->nullable();
             $table->integer('sales')->default(0);
