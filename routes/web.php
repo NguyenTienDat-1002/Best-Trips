@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,8 +62,12 @@ Route::get('/tour/{id}', 'TourController@show');
 
 Route::get('/tours','TourController@search');
 
+
 Route::get('/test', 'testsessionController@test');
 
 Route::get('/result','testsessionController@result');
 
+Route::get('/time', function(){
+    return Carbon::now()->toDateTimeString();
+});
 

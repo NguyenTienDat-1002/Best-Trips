@@ -19,13 +19,14 @@ return new class extends Migration
             $table->string('title');
             $table->decimal('price',6,2)->nullable();
             $table->integer('duration')->nullable();
-            $table->string('departure_point')->nullable();
+            $table->integer('departure_point')->unsigned()->nullable();
             $table->date('departure_date')->nullable();
             $table->string('overview')->nullable();
             $table->string('img')->nullable();
             $table->integer('sales')->default(0);
             $table->string('video')->nullable();
             $table->string('description')->nullable();
+            $table->foreign('departure_point')->references('id')->on('Province');
         });
     }
 

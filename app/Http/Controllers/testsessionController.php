@@ -17,6 +17,8 @@ class testsessionController extends Controller
         if($request->session()->has('data'))
             return $request->session()->get('data');
         else
-            return false;
+            return $request->session()->get('data');
     }
+
+    
 }
