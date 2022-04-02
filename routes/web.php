@@ -71,3 +71,4 @@ Route::get('/time', function(){
     return Carbon::now()->toDateTimeString();
 });
 
+Route::get('/api/addComment', 'ApiController@addComment');
