@@ -151,7 +151,7 @@ class TourController extends Controller
             $tour->update([
                 'img'=>'http://127.0.0.1:8000/storage/'.$request->file('img')->storeAs('tours/img', $temp->id.'.'.$request->file('img')->getClientOriginalExtension(), 'public'),
             ]);
-        if($request->hasFile('img')) 
+        if($request->hasFile('video')) 
             $tour->update([
                 'video'=>'http://127.0.0.1:8000/storage/'.$request->file('video')->storeAs('tours/video', $temp->id.'.'.$request->file('video')->getClientOriginalExtension(), 'public'),
             ]);
@@ -191,6 +191,9 @@ class TourController extends Controller
 
         return view('booking',['tour'=>$tour[0]]);
     }
-
+    
+    public function payment(Request $request){
+        return view('payment');
+    }
     
 }

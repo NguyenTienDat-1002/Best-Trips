@@ -29,14 +29,24 @@
                         <p class="lead">Departure point: {{$tour->province->province}}</p>
                         <p class="lead">Departure time: {{date('d/m/Y',strtotime($tour->departure_date))}}</p>
                         <div class="d-flex">
+
+                        @if(Auth::check()&&Auth::guard()->user()->role=="Admin")
                             <a class="Delete_btn btn btn-outline-dark flex-shrink-0" type="button" href="{{URL::asset(route('deleteTour',['id'=>$tour->id]))}}">
+                                <i class="bi-cart-fill me-1"></i>
                                 Delete
                             </a>
-                            @if(Auth::check()&&Auth::guard()->user()->role=="Admin")
+                            
                             <a class="Edit_btn btn btn-outline-dark flex-shrink-0" type="button" href="{{route('editTour',['id'=>$tour->id])}}"style="margin-left: 10px">
+                                <i class="bi-cart-fill me-1"></i>
                                 Edit
                             </a>
-                            @endif
+                        @else
+                            <a class="Book_btn btn btn-outline-dark flex-shrink-0" type="button" href="{{URL::asset(route('tour.book',['id'=>$tour->id]))}}">
+                                <i class="bi-cart-fill me-1"></i>
+                                Booking
+                            </a>
+                        @endif
+
                         </div>
                     </div>
                 </div>
@@ -68,7 +78,7 @@
         <section class="py-5 bg-light">
             <div class="container px-4 px-lg-5 mt-5">
                 @if($Prices->count())
-                <h2 class="fw-bolder mb-4">Other tours:</h2>
+                <h2 class="fw-bolder mb-4">Other tours</h2>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     @foreach ($Prices as $i=>$value )
                         <x-tour-item :tour="$value"/>

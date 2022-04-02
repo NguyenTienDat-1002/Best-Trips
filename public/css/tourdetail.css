@@ -9,7 +9,7 @@
 }
 
 .tourdetail-container h1{
-    font-size: 50px;
+    font-size: 30px;
 }
 
 .Delete_btn {
@@ -21,6 +21,13 @@
 
 .Edit_btn {
     background-color: black;
+    border-radius: 30px;
+    color: white;
+    margin-top: 20px;
+}
+
+.Book_btn {
+    background-color: blue;
     border-radius: 30px;
     color: white;
     margin-top: 20px;
@@ -39,6 +46,6 @@
 }
 
 .tour_video {
-    width: 80%;
+    width: 50%;
     height: 350px;
 }
