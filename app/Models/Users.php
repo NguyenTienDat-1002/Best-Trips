@@ -13,4 +13,8 @@ class Users extends Authenticatable
     protected $primaryKey = "id";
     protected $guarded =[];
     public $timestamps = false;
+
+    public function comments(){
+        return $this->hasMany('App\Models\Comment','user_id','id');
+    }
 }

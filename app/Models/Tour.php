@@ -16,4 +16,8 @@ class Tour extends Model
     public function province(){
         return $this->belongsTo('App\Models\Province','departure_point','id');
     }
+
+    public function comments(){
+        return $this->hasMany('App\Models\Comment','tour_id','id');
+    }
 }
