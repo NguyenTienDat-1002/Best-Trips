@@ -91,8 +91,8 @@
     transition: all .25s;
     }
 
-    textarea.review{
-    background: #222;
+    input.review{
+    background: gray;
     border: none;
     width: 100%;
     max-width: 100%;
@@ -106,7 +106,6 @@
     display: block;
     transition:opacity .25s;
     }
-
 
 
     input.star:checked ~ .rev-box{
@@ -191,6 +190,7 @@
     <p><h1 style = "margin-left : 10%;">Rate Tour</h1></p>
     <div class="cont">
         <div class="stars">
+            <span>{{Auth::user()->username}}</span>
             <form action = "/api/addComment" method = "post">
                 @csrf
                 <input type="text" name = "tour_id" hidden value = "{{$tour->id}}">
@@ -206,10 +206,10 @@
                 <input hidden type = "text" name = "rating" id = "rating"/>
                 <label class="star star-1" for="star-1-2"></label>
                 <div class="rev-box">
-                    <textarea class="review" onKeyUp= "commenting()" id = "review" col="30" name="content"></textarea>
+                    <input class="review" onKeyUp= "commenting()" id = "review" col="30" name="content"></input>
                     <button type="submit">Submit</button>
                 </div>
-`           </form>                
+           </form>                
         </div>
     </div>
     <br>
