@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <style>
         body {
     background: #ddd;
@@ -218,17 +219,17 @@ input:focus:-ms-input-placeholder {
     color: transparent
 }
     </style>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div class="card mt-50 mb-50">
-    
+        <span><a href="{{URL::asset('/')}}">Back to home</a></span>
         <div class="card-title mx-auto"> Settings </div>
         <div class="nav">
             <ul class="mx-auto">
                 <li class="active"><a >Payment</a></li>
             </ul>
         </div>
+        
         <form> <span id="card-header">Your cards:</span>
             
             <div class="row-1">
@@ -244,8 +245,8 @@ input:focus:-ms-input-placeholder {
                 </div>
                 <div class="col-2"> <input type="text" placeholder="Exp. date"> </div>
                 <div class="col-2"> <input type="text" placeholder="CVV"> </div>
-            </div> <button class="btn d-flex mx-auto"><b>Add card</b></button>
-                   <button class="btn d-flex mx-auto"><b>Add card</b></button>
+            </div> <button class="btn d-flex mx-auto"><b>Add card</b></a>
+                   <a class="btn d-flex mx-auto"><b>Cancel</b></a>
         </form>
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
