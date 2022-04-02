@@ -138,7 +138,7 @@
                             @endif
                         </div>
                         <p class="lead">Duration: {{$tour->duration}}</p>
-                        
+                        <p class="lead">Departure point: {{$tour->province->province}}</p>
                         <p class="lead">Departure time: {{date('d/m/Y',strtotime($tour->departure_date))}}</p>
                         <div class="d-flex">
                         @if(Auth::check()&&Auth::guard()->user()->role=="Admin")
