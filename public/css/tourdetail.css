@@ -1,0 +1,51 @@
+.tourimage {
+    width: 590px;
+    height: 330px;
+}
+
+.tourdetail-container p{
+    margin: 0%;
+    margin-top: 0px;
+}
+
+.tourdetail-container h1{
+    font-size: 30px;
+}
+
+.Delete_btn {
+    background-color: red;
+    border-radius: 30px;
+    color: white;
+    margin-top: 20px;
+}
+
+.Edit_btn {
+    background-color: black;
+    border-radius: 30px;
+    color: white;
+    margin-top: 20px;
+}
+
+.Book_btn {
+    background-color: blue;
+    border-radius: 30px;
+    color: white;
+    margin-top: 20px;
+}
+
+.textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}
+
+.tour_video {
+    width: 50%;
+    height: 350px;
+}
