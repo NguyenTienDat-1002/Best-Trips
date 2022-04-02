@@ -3,7 +3,7 @@
 <head>
    <x-header/>
 
-   <link rel="stylesheet" href="{{URL::asset('css/tourdetail.css')}}">
+   {{-- <link rel="stylesheet" href="{{URL::asset('css/tourdetail.css')}}"> --}}
    <style>
     @import url(https://fonts.googleapis.com/css?family=Roboto:500,100,300,700,400);
     *{
@@ -188,6 +188,7 @@
         </section>
         
     <p><h1 style = "margin-left : 10%;">Rate Tour</h1></p>
+    @if(Auth::check())
     <div class="cont">
         <div class="stars">
             <span>{{Auth::user()->username}}</span>
@@ -212,6 +213,7 @@
            </form>                
         </div>
     </div>
+    @endif
     <br>
     <p ><h1 style = "margin-left : 10%;">Reviews</h1></p>
     @foreach($comments as $comment)
