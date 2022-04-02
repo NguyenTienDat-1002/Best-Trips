@@ -31,22 +31,21 @@
 			<div class="container">
 				<div class="row">
 					<div class="booking-form">
-						<form method="POST" action="{{route('preparePayment',['id'=>$tour->id])}}">
-							@csrf
+						<form>
 							<div class="form-group">
-								<h1 style="color: white">Booking: BST-{{$tour->id}} {{$tour->title}} Departure: {{$tour->province->province}}</h1>
+								<h1 style="color: white">Booking: SKU: BST-{{$tour->id}} {{$tour->title}} Departure: {{$tour->province->province}}</h1>
 							</div>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
 										<span class="form-label">Phone:</span>
-										<input class="form-control" type="tel" placeholder="Phone" name="phone">
+										<input class="form-control" type="tel" placeholder="Phone">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<span class="form-label">Email</span>
-										<input class="form-control" type="email" placeholder="Email" name="email">
+										<input class="form-control" type="email" placeholder="Email">
 									</div>
 								</div>
 							</div>
@@ -66,13 +65,13 @@
 								<div class="col-md-2">
 									<div class="form-group">
 										<span class="form-label">Adults (18+)</span>
-										<input class="form-control" type="number" name="adults" value="1" min="1"/>
+										<input class="form-control" type="number" name="adults" min="1"/>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="form-group">
 										<span class="form-label">Children (0-17)</span>
-										<input class="form-control" type="number" value="0" name="children" min="0"/>
+										<input class="form-control" type="number" name="children" min="0"/>
 									</div>
 								</div>
 							</div>
@@ -80,13 +79,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <span class="form-label">Address:</span>
-                                        <input class="form-control" type="text" placeholder="Address" name="address">
+                                        <input class="form-control" type="text" placeholder="Address">
                                     </div>
                                 </div>   
                             </div>
 							<div class="col-md-3">
 								<div class="form-btn">
-									<button class="submit-btn" type="submit">Book</button>
+									<button class="submit-btn">Book</button>
 								</div>
 							</div>
 						</form>

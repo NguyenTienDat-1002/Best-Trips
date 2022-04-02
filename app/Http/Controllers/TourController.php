@@ -186,6 +186,15 @@ class TourController extends Controller
         return view('tours',['tours'=> $tours->paginate(),'provinces'=>$provinces]);
 
     }
- 
+
+    public function book($id){
+        $tour=Tour::where('id', $id)->get();
+
+        return view('booking',['tour'=>$tour[0]]);
+    }
+    
+    public function payment(Request $request){
+        return view('payment');
+    }
     
 }

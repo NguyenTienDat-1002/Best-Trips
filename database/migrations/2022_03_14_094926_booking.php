@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('address');
-            $table->integer('adults')->unsigned();
+            $table->integer('adult')->unsigned();
             $table->integer('children')->unsigned();
             $table->foreign('user_id')->references('id')->on('User');
             $table->foreign('tour_id')->references('id')->on('Tour');
