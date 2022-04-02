@@ -14,12 +14,26 @@
     }
 
     function add_Highlight(){
-        let input = document.createElement('input');
-        input.className="w3-input w3-border";
-        input.name="hightlight[]";
-        input.type="file";
-        let hightlight= document.querySelector('#highlight');
-        hightlight.appendChild(input);
-     console.log(hightlight)
+        var div = document.getElementById("highlight")
+        var bfAdd = document.getElementById("beforeAdd")
+        for (let index = 0; index < 3; index++) {
+            var p = document.createElement('p')
+            let label = document.createElement('label')
+            let input = document.createElement('input');
+            
+            p.className = "w3-third"
+
+            label.className = "w3-text-grey"
+            label.innerText = "High Light"
+            
+            input.className="w3-input w3-border";
+            input.name="hightlight[]";
+            input.type="file";
+            
+            //p.appendChild(label)
+            p.appendChild(input); 
+            div.insertBefore(p,bfAdd); 
+        }
+        bfAdd.style.display = "none"
     }
 </script>

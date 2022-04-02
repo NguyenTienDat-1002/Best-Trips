@@ -78,29 +78,22 @@
                                             </p>
                                         </div>
                                         
-                                        <div class="w3-row-padding">
-                                            <p id="iternaries">
-                                            <label class="w3-text-grey" for="address">Iternary</label>
-                                              <input class="w3-input w3-border" type="text" id="iternary" name="iternaries[]" >
-                                            </p>
-                                            <div style="
-                                            --b:4px; /* the thickness */
-                                            width:40px; /* the size */
-                                            aspect-ratio:1/1;
-                                            border:10px solid #000; /* the outer space */
-                                            background:
-                                              conic-gradient(from 90deg at var(--b) var(--b),#000 90deg,#fff 0) 
-                                              calc(100% + var(--b)/2) calc(100% + var(--b)/2)/
-                                              calc(50%  + var(--b))   calc(50%  + var(--b));
-                                            display:inline-block;" onclick="add_Iternary()">
-                                            </div>
-                                        </div>
                                 
-                                        <div class="w3-row-padding">
-                                            <p id="highlight">      
+                                        <div class="w3-row-padding" id = "highlight">
+                                            <p id="highlight" class="w3-third">      
+                                                <label class="w3-text-grey" ></label>
+                                                <input class="w3-input w3-border" type="file"  name="hightlight[]"/>
+                                            </p>
+                                            <p id="highlight" class="w3-third">      
                                                 <label class="w3-text-grey" >High light</label>
                                                 <input class="w3-input w3-border" type="file"  name="hightlight[]"/>
-                                                <div style="
+                                            </p>
+                                            <p id="highlight" class="w3-third">      
+                                                <label class="w3-text-grey" ></label>
+                                                <input class="w3-input w3-border" type="file"  name="hightlight[]"/>
+                                            </p>
+
+                                                <div id= "beforeAdd" style="
                                             --b:4px; /* the thickness */
                                             width:40px; /* the size */
                                             aspect-ratio:1/1;
@@ -111,7 +104,7 @@
                                               calc(50%  + var(--b))   calc(50%  + var(--b));
                                             display:inline-block;" onclick="add_Highlight()">
                                             </div>
-                                            </p>
+                                            
                                         </div>
 
                                         <div class="w3-row-padding">
