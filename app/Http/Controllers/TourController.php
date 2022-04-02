@@ -117,7 +117,6 @@ class TourController extends Controller
         $description=Storage::disk('local')->get($tour->description);
 
         $provinces=Province::all();
-
         return view('editTour')->with(['tour' => $tour, 
         'overview'=>str_replace("\n",'<br>',$overview), 
         'description'=>str_replace("\n",'<br>',$description),
@@ -134,7 +133,29 @@ class TourController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $tour=Tour::where('id',$id);
+        $tour->update([
+            'title' => $request->title,
+            'price' => $request->price,
+            'duration' =>$request->duration,
+            'departure_point' => $request->departure,
+            'departure_date' =>$request->time,
+            'sales' => $request->sale,
+        ]);
+        $temp=$tour->get()[0];
+
+        Storage::disk('local')->put('overview/'.$temp->id.'.txt',$request->overview);
+        Storage::disk('local')->put('description/'.$temp->id.'.txt',$request->description);
         
+        if($request->hasFile('img')) 
+            $tour->update([
+                'img'=>'http://127.0.0.1:8000/storage/'.$request->file('img')->storeAs('tours/img', $temp->id.'.'.$request->file('img')->getClientOriginalExtension(), 'public'),
+            ]);
+        if($request->hasFile('img')) 
+            $tour->update([
+                'video'=>'http://127.0.0.1:8000/storage/'.$request->file('video')->storeAs('tours/video', $temp->id.'.'.$request->file('video')->getClientOriginalExtension(), 'public'),
+            ]);
+        return redirect(route('tourDetails',['id'=>$temp->id]));
     }
 
     /**
@@ -152,11 +173,16 @@ class TourController extends Controller
     }
 
     public function search(Request $request){
+        $provinces=Province::all();
         $tours=Tour::where('title','like', "%{$request->key}%");
-        if($request->time)
-            $tours->where('departure_date','>',$request->time);
-        
-        return view('tours',['tours'=> $tours->paginate()]);
+        if($request->from)
+            $tours->whereDate('departure_date','>=',$request->from);
+        if($request->to)
+            $tours->whereDate('departure_date','<=',$request->to);
+        if($request->province)
+            $tours->where('departure_point',$request->province);
+        //dd($request);
+        return view('tours',['tours'=> $tours->paginate(),'provinces'=>$provinces]);
 
     }
 
