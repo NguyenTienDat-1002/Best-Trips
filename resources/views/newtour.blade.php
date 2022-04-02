@@ -91,7 +91,7 @@
                                             <p id="highlight" class="w3-third">      
                                                 <label class="w3-text-grey" ></label>
                                                 <input class="w3-input w3-border" type="file"  name="hightlight[]"/>
-                                            </p>
+                                            </p> 
 
                                                 <div id= "beforeAdd" style="
                                             --b:4px; /* the thickness */
