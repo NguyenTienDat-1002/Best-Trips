@@ -4,10 +4,10 @@
 <head>
     @includeIf('partials.W3CSS')
     <title>Booking Page</title>
-    <!-- <link rel="stylesheet" href="resources/css/booking.css"> -->
+     <link rel="stylesheet" href="{{URL::asset('css/booking.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
+    <!-- <style>
         /* body {
 
         } */
@@ -32,7 +32,7 @@
         input::placeholder {
             color: white !important;
         }
-    </style>
+    </style> -->
 </head>
 
 <body>
