@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
    <x-header/>
+
+   <link rel="stylesheet" href="{{URL::asset('css/tourdetail.css')}}">
    <style>
     @import url(https://fonts.googleapis.com/css?family=Roboto:500,100,300,700,400);
     *{
@@ -89,8 +91,8 @@
     transition: all .25s;
     }
 
-    textarea.review{
-    background: #222;
+    input.review{
+    background: gray;
     border: none;
     width: 100%;
     max-width: 100%;
@@ -104,7 +106,6 @@
     display: block;
     transition:opacity .25s;
     }
-
 
 
     input.star:checked ~ .rev-box{
@@ -125,11 +126,13 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{$tour->img}}" alt="..." /></div>
-                    <div class="col-md-6">
-                        <div class="small mb-1">SKU: BST-{{$tour->id}}</div>
-                        <h1 class="display-5 fw-bolder">{{$tour->title}}</h1>
-                        <div class="fs-5 mb-5">
+                    <div class="col-md-6"><img class="tourimage card-img-top mb-5 mb-md-0" src="{{$tour->img}}" alt="..." />
+                </div>
+                    <div class="tourdetail-container col-md-6">
+                        <!-- <div class="small mb-1">SKU: BST-{{$tour->id}}</div> -->
+                        <p class="small mb-1">SKU: BST-{{$tour->id}}</p>
+                        <h1 class="display-5 fw-bolder mb-3">{{$tour->title}}</h1>
+                        <div class="fs-5 mb-1">
                             @if($tour->sales!=0)
                                 <span class="text-decoration-line-through">{{$tour->price}}</span>
                                 <span>${{$tour->price*(100-$tour->sales)/100}}</span>
@@ -141,18 +144,19 @@
                         <p class="lead">Departure point: {{$tour->province->province}}</p>
                         <p class="lead">Departure time: {{date('d/m/Y',strtotime($tour->departure_date))}}</p>
                         <div class="d-flex">
+
                         @if(Auth::check()&&Auth::guard()->user()->role=="Admin")
-                            <a class="btn btn-outline-dark flex-shrink-0" type="button" href="{{URL::asset(route('deleteTour',['id'=>$tour->id]))}}">
+                            <a class="Delete_btn btn btn-outline-dark flex-shrink-0" type="button" href="{{URL::asset(route('deleteTour',['id'=>$tour->id]))}}">
                                 <i class="bi-cart-fill me-1"></i>
                                 Delete
                             </a>
                             
-                            <a class="btn btn-outline-dark flex-shrink-0" type="button" href="{{route('editTour',['id'=>$tour->id])}}"style="margin-left: 10px">
+                            <a class="Edit_btn btn btn-outline-dark flex-shrink-0" type="button" href="{{route('editTour',['id'=>$tour->id])}}"style="margin-left: 10px">
                                 <i class="bi-cart-fill me-1"></i>
                                 Edit
                             </a>
                         @else
-                            <a class="btn btn-outline-dark flex-shrink-0" type="button" href="{{URL::asset(route('tour.book',['id'=>$tour->id]))}}">
+                            <a class="Book_btn btn btn-outline-dark flex-shrink-0" type="button" href="{{URL::asset(route('tour.book',['id'=>$tour->id]))}}">
                                 <i class="bi-cart-fill me-1"></i>
                                 Booking
                             </a>
@@ -163,21 +167,21 @@
                 </div>
             </div>
             <div class="container px-4 px-lg-5 my-5">
-                <p class="lead"><h1>Overview:</h1> 
-                    {!!$overview!!}
+                <p class="lead"><h1>Description</h1> 
+                    <div class="textarea">{!!$description!!}</div>
                 </p>
             </div>
             <div class="container px-4 px-lg-5 my-5">
-                <p class="lead"><h1>Video:</h1> 
-                    <center><video controls>
+                <p class="lead"><h1>Video</h1> 
+                    <center><video controls class="tour_video">
                         <source src="{{$tour->video}}" type="video/{{pathinfo($tour->video, PATHINFO_EXTENSION);}}">
                       Your browser does not support the video tag.
                     </video></center>
                 </p>
             </div>
             <div class="container px-4 px-lg-5 my-5">
-                <p class="lead"><h1>Description:</h1> 
-                    {!!$description!!}
+                <p class="lead"><h1>Overview</h1> 
+                    <div class="textarea">{!!$overview!!}</div>
                 </p>
             </div>
 
@@ -186,6 +190,7 @@
     <p><h1 style = "margin-left : 10%;">Rate Tour</h1></p>
     <div class="cont">
         <div class="stars">
+            <span>{{Auth::user()->username}}</span>
             <form action = "/api/addComment" method = "post">
                 @csrf
                 <input type="text" name = "tour_id" hidden value = "{{$tour->id}}">
@@ -201,10 +206,10 @@
                 <input hidden type = "text" name = "rating" id = "rating"/>
                 <label class="star star-1" for="star-1-2"></label>
                 <div class="rev-box">
-                    <textarea class="review" onKeyUp= "commenting()" id = "review" col="30" name="content"></textarea>
+                    <input class="review" onKeyUp= "commenting()" id = "review" col="30" name="content"></input>
                     <button type="submit">Submit</button>
                 </div>
-`           </form>                
+           </form>                
         </div>
     </div>
     <br>
@@ -234,7 +239,7 @@
         <section class="py-5 bg-light">
             <div class="container px-4 px-lg-5 mt-5">
                 @if($Prices->count())
-                <h2 class="fw-bolder mb-4">Other tours:</h2>
+                <h2 class="fw-bolder mb-4">Other tours</h2>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     @foreach ($Prices as $i=>$value )
                         <x-tour-item :tour="$value"/>

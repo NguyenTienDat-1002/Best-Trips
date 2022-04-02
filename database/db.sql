@@ -87,9 +87,9 @@ insert into `User`(username, `password`, full_name, role)
 values ('adminphuc', 'phucnguyen', 'Nguyen Tan Phuc', 'Admin'),
 ('admindat', 'datnguyen', 'Nguyen Tien Dat', 'Admin'),
 ('adminkhoe', 'khoengo', 'Ngo Minh Khoe', 'Admin'),
-('employee1', 'employee1', 'Employee 1', 'Employee')
-('employee2', 'employee2', 'Employee 2', 'Employee')
-('customer1', 'customer2', 'Customer 1', 'Customer')
+('employee1', 'employee1', 'Employee 1', 'Employee'),
+('employee2', 'employee2', 'Employee 2', 'Employee'),
+('customer1', 'customer2', 'Customer 1', 'Customer'),
 ('customer2', 'customer2', 'Customer 2', 'Customer');
 
 insert into Tour(title, overview, img) 

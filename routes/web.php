@@ -68,6 +68,8 @@ Route::get('/test/{id}', 'testsessionController@test');
 
 Route::get('/result','testsessionController@result');
 
+Route::get('/sbook',function() {return view('book');});
+
 Route::get('/time', function(){
     return Carbon::now()->toDateTimeString();
 });
