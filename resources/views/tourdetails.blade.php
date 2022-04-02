@@ -141,16 +141,23 @@
                         
                         <p class="lead">Departure time: {{date('d/m/Y',strtotime($tour->departure_date))}}</p>
                         <div class="d-flex">
+                        @if(Auth::check()&&Auth::guard()->user()->role=="Admin")
                             <a class="btn btn-outline-dark flex-shrink-0" type="button" href="{{URL::asset(route('deleteTour',['id'=>$tour->id]))}}">
                                 <i class="bi-cart-fill me-1"></i>
                                 Delete
                             </a>
-                            @if(Auth::check()&&Auth::guard()->user()->role=="Admin")
+                            
                             <a class="btn btn-outline-dark flex-shrink-0" type="button" href="{{route('editTour',['id'=>$tour->id])}}"style="margin-left: 10px">
                                 <i class="bi-cart-fill me-1"></i>
                                 Edit
                             </a>
-                            @endif
+                        @else
+                            <a class="btn btn-outline-dark flex-shrink-0" type="button" href="{{URL::asset(route('tour.book',['id'=>$tour->id]))}}">
+                                <i class="bi-cart-fill me-1"></i>
+                                Booking
+                            </a>
+                        @endif
+
                         </div>
                     </div>
                 </div>
