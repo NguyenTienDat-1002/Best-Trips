@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tour;
+use App\Models\Booking;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -27,5 +29,19 @@ class BookController extends Controller
                                 'email'=>$email,'adults'=>$adults,
                                 'children'=>$children,'address'=>$address,
                                 'price'=>$price]);
+    }
+
+    public function payment(Request $request){
+        $book=Booking::create([
+            'user_id'=>Auth::user()->id,
+            'tour_id'=>$request->tour_id,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'adults'=>$request->adults,
+            'children'=>$request->children,
+            'address'=>$request->address,
+            'price'=>$request->price,
+        ]);
+        return view('successful');
     }
 }

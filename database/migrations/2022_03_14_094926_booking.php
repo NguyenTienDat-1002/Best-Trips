@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('address');
             $table->integer('adults')->unsigned();
             $table->integer('children')->unsigned();
+            $table->decimal('price',10,2)->nullable();
             $table->foreign('user_id')->references('id')->on('User');
             $table->foreign('tour_id')->references('id')->on('Tour');
         });

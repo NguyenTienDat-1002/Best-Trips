@@ -229,13 +229,15 @@ input:focus:-ms-input-placeholder {
                 <li class="active"><a >Price: {{$price}}$</a></li>
             </ul>
         </div>
-        <form> <span id="card-header">Your cards:</span>
+        <form action="{{route('payment')}}" method="POST"> <span id="card-header">Your cards:</span>
+            @csrf
             <input name="tour_id" value="{{$tour_id}}" hidden>
             <input name="email" value="{{$email}}" hidden>
             <input name="phone" value="{{$phone}}" hidden>
             <input name="adults" value="{{$adults}}" hidden>
             <input name="children" value="{{$children}}" hidden>
             <input name="address" value="{{$address}}" hidden>
+            <input name="price" value="{{$price}}" hidden>
             <div class="row-1">
                 <div class="row row-2"> <span id="card-inner">Card holder name</span> </div>
                 <div class="row row-2"> <input type="text" placeholder="Bojan Viner" name="name"> </div>
