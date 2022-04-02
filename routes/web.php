@@ -53,9 +53,9 @@ Route::middleware('admin')->group(function(){
 
 Route::middleware('customer')->group(function(){
 
-    Route::get('/tour/{id}/book','TourController@book')->name('tour.book');
-    Route::get('/payment/{id}','TourController@payment');
-
+    Route::get('/tour/{id}/book','BookController@create')->name('tour.book');
+    Route::post('/tour/{id}/book','BookController@preparePayment')->name('preparePayment');
+    Route::post('/payment','BookController@payment');
 
 });
 

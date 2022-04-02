@@ -112,6 +112,9 @@ form .row-1 {
     overflow: hidden
 }
 
+.btn:hover{
+    color:white;
+}
 form .row-2 {
     border: none;
     outline: none;
@@ -222,16 +225,22 @@ input:focus:-ms-input-placeholder {
 </head>
 <body>
     <div class="card mt-50 mb-50">
-        <span><a href="{{URL::asset('/')}}">Back to home</a></span>
-        <div class="card-title mx-auto"> Settings </div>
+        <span><a href="{{URL::asset('/')}}"><-Back to home</a></span>
+        <div class="card-title mx-auto"> Payment </div>
         <div class="nav">
             <ul class="mx-auto">
-                <li class="active"><a >Payment</a></li>
+                <li class="active"><a >Price:{{$price}}$</a></li>
             </ul>
         </div>
         
-        <form> <span id="card-header">Your cards:</span>
-            
+        <form method="Post" action="{{URL::asset("/payment")}}"> <span id="card-header">Your cards:</span>
+            @csrf
+            <input hidden name="tour_id" value="{{$tour}}">
+            <input hidden name="email" value="{{$email}}">
+            <input hidden name="adults" value="{{$adults}}">
+            <input hidden name="children" value="{{$children}}">
+            <input hidden name="address" value="{{$address}}">
+            <input hidden name="phone" value="{{$phone}}">
             <div class="row-1">
                 <div class="row row-2"> <span id="card-inner">Card holder name</span> </div>
                 <div class="row row-2"> <input type="text" placeholder="Bojan Viner"> </div>
@@ -245,8 +254,9 @@ input:focus:-ms-input-placeholder {
                 </div>
                 <div class="col-2"> <input type="text" placeholder="Exp. date"> </div>
                 <div class="col-2"> <input type="text" placeholder="CVV"> </div>
-            </div> <button class="btn d-flex mx-auto"><b>Add card</b></a>
-                   <a class="btn d-flex mx-auto"><b>Cancel</b></a>
+            </div> 
+            <button class="btn d-flex mx-auto" type="submit" style="color:#000"><b>Add card</b></button>
+            <a class="btn d-flex mx-auto"><b>Cancel</b></a>
         </form>
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
