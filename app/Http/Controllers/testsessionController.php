@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Session;
 class testsessionController extends Controller
 {
     //
-    public function test(){
-        session()->put('data','name');
+    public function test($id){
+        session()->put('data',$id);
         return session()->get('data');
     }
 

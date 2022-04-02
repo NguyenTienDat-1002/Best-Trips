@@ -89,15 +89,15 @@ class TourController extends Controller
         $tour = Tour::findOrFail($id);
         //$tours= DB::select("select * from tour where price*(100-sales)/100 between {$tour->price}*0.9 And {$tour->price}*1.1" );
         //$tours = Tour::whereBetween('price', [$tour->price *0.9,$tour->price *1.1])->where('id',"!=",$tour->id)->get();
-        $tours = Tour::select('*')->where('id',"!=",$tour->id)->whereRaw("price*(100-sales)/100 between {$tour->price}*0.9 And {$tour->price}*1.1")->get();
+        $Prices = Tour::select('*')->where('id',"!=",$tour->id)->whereRaw("price*(100-sales)/100 between {$tour->price}*0.9 And {$tour->price}*1.1")->get();
         
-        if($tours->count()>=4)
+        if($Prices->count()>=4)
             $tours=$tours->random(4); 
 
         $overview=Storage::disk('local')->get($tour->overview);
         $description=Storage::disk('local')->get($tour->description);
 
-         return view('tourdetails', ['tour' => $tour, 'tours' => $tours, 
+         return view('tourdetails', ['tour' => $tour, 'Prices' => $Prices, 
                      'overview'=>str_replace("\n",'<br>',$overview), 
                      'description'=>str_replace("\n",'<br>',$description)]);
     }
