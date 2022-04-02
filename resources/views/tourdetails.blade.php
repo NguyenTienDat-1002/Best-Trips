@@ -141,9 +141,9 @@
                         
                         <p class="lead">Departure time: {{date('d/m/Y',strtotime($tour->departure_date))}}</p>
                         <div class="d-flex">
-                            <a class="btn btn-outline-dark flex-shrink-0" type="button" href="{{URL::asset(route('tour.book',['id'=>$tour->id]))}}">
+                            <a class="btn btn-outline-dark flex-shrink-0" type="button" href="{{URL::asset(route('deleteTour',['id'=>$tour->id]))}}">
                                 <i class="bi-cart-fill me-1"></i>
-                                Booking
+                                Delete
                             </a>
                             @if(Auth::check()&&Auth::guard()->user()->role=="Admin")
                             <a class="btn btn-outline-dark flex-shrink-0" type="button" href="{{route('editTour',['id'=>$tour->id])}}"style="margin-left: 10px">
@@ -226,10 +226,10 @@
         <!-- Related items section-->
         <section class="py-5 bg-light">
             <div class="container px-4 px-lg-5 mt-5">
-                @if($tours)
+                @if($Prices->count())
                 <h2 class="fw-bolder mb-4">Other tours:</h2>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    @foreach ($tours as $i=>$value )
+                    @foreach ($Prices as $i=>$value )
                         <x-tour-item :tour="$value"/>
                     @endforeach
                 </div>
