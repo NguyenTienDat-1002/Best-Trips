@@ -187,11 +187,7 @@ class TourController extends Controller
 
     }
 
-    public function book($id){
-        $tour=Tour::where('id', $id)->get();
 
-        return view('booking',['tour'=>$tour[0]]);
-    }
     
     public function payment(Request $request){
         return view('payment');
