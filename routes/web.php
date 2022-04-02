@@ -47,7 +47,7 @@ Route::middleware('admin')->group(function(){
 
     Route::post('/tour/update/{id}', 'TourController@update')->name('updateTour');
     
-    Route::get('/tour/delete/{id}','TourController@destroy');
+    Route::get('/tour/delete/{id}','TourController@destroy')->name('deleteTour');
 });
 
 
@@ -63,7 +63,7 @@ Route::get('/tour/{id}', 'TourController@show')->name('tourDetails');
 Route::get('/tours','TourController@search');
 
 
-Route::get('/test', 'testsessionController@test');
+Route::get('/test/{id}', 'testsessionController@test');
 
 Route::get('/result','testsessionController@result');
 
