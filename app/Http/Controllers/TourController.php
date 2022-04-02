@@ -96,9 +96,10 @@ class TourController extends Controller
 
         $overview=Storage::disk('local')->get($tour->overview);
         $description=Storage::disk('local')->get($tour->description);
-
+        $comments=$tour->comments;
          return view('tourdetails', ['tour' => $tour, 'Prices' => $Prices, 
                      'overview'=>str_replace("\n",'<br>',$overview), 
+                     'comments'=> $comments,
                      'description'=>str_replace("\n",'<br>',$description)]);
     }
 // str_replace("\n",'<br>',htmlentities($description))||str_replace("\n",'<br>',htmlentities($overview))

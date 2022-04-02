@@ -52,7 +52,7 @@
     label.star {
     float: right;
     padding: 10px;
-    font-size: 10px;
+    font-size: 20px;
     color: #444;
     transition: all .2s;
     }
@@ -138,7 +138,7 @@
                             @endif
                         </div>
                         <p class="lead">Duration: {{$tour->duration}}</p>
-                        
+                        <p class="lead">Departure point: {{$tour->province->province}}</p>
                         <p class="lead">Departure time: {{date('d/m/Y',strtotime($tour->departure_date))}}</p>
                         <div class="d-flex">
                         @if(Auth::check()&&Auth::guard()->user()->role=="Admin")
@@ -183,7 +183,7 @@
 
         </section>
         
-    <p style = "margin-left : 10%;">Rate Tour</p>
+    <p><h1 style = "margin-left : 10%;">Rate Tour</h1></p>
     <div class="cont">
         <div class="stars">
             <form action = "/api/addComment" method = "post">
@@ -208,27 +208,27 @@
         </div>
     </div>
     <br>
-    <p style = "margin-left : 10%;">Reviews</p>
+    <p ><h1 style = "margin-left : 10%;">Reviews</h1></p>
+    @foreach($comments as $comment)
     <div class = "cont">
         <div class="stars">
         <div>
-            <input class="star star-5" id="star-5" type="radio" name="star2"/>
-            <label class="star star-5" for="star-5"></label>
-            <input class="star star-4" id="star-4" type="radio" name="star2"/>
-            <label class="star star-4" for="star-4"></label>
-            <input class="star star-3" id="star-3" type="radio" name="star2"/>
-            <label class="star star-3" for="star-3"></label>
-            <input class="star star-2" id="star-2" type="radio" name="star2"/>
-            <label class="star star-2" for="star-2"></label>
-            <input class="star star-1" id="star-1" type="radio" name="star2"/>
-            <label class="star star-1" for="star-1"></label>
+        @php
+        for ($x = $comment->rate; $x >= 1 ; $x--) {
+            echo "<label style = 'color:#FE7;' class='star star-{$x}' for='star-{$x}-2'></label>";
+        }
+        @endphp
+    
             
         </div>
         </div>
-            <p>Good Tour</p>
+            <p style = "color:black">Name:{{$comment->user->full_name}}</p>
+            <p style = "color:black">Comment:{{$comment->content}}</p>
+            <p>{{$comment->rate}}</p>
         </div>
     </div>
     
+    @endforeach
         
         <!-- Related items section-->
         <section class="py-5 bg-light">
