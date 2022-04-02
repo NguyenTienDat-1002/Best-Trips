@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ApiController extends Controller
 {
@@ -21,24 +22,19 @@ class ApiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function addComment(Request $request){
-        try{
-            $tourID = $request->tour_id;
-            DB::beginTransaction();
-            Comment::create([
-                'user_id' => "2",
-                'tour_id' => $tourID,
-                'content' => "",
-                'rate' => 0,
-                'time' => Carbon::now()
-            ]);
-            DB::commit();
+        
+        $tourID = $request->tour_id;
+        $rating = $request->rating;
+        DB::beginTransaction();
+        Comment::create([
+            'user_id' => Auth::user()->id,
+            'tour_id' => $tourID,
+            'content' => $request->content,
+            'rate' => $request->rating,
+            'time' => Carbon::now()
+        ]);
+        DB::commit();
 
-            return response()->json([
-                'name' => 'Abigail',
-                'state' => 'CA',
-            ]);
-        }catch(e){
-
-        }
+        return redirect()->back();
     }
 }

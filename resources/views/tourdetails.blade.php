@@ -179,21 +179,23 @@
     <p style = "margin-left : 10%;">Rate Tour</p>
     <div class="cont">
         <div class="stars">
-            <form action="/api/addComment" method = "POST">
+            <form action = "/api/addComment" method = "post">
+                @csrf
                 <input type="text" name = "tour_id" hidden value = "{{$tour->id}}">
-                <input class="star star-5" id="star-5-2" type="radio" name="star"/>
+                <input class="star star-5" onclick = "commenting()" id="star-5-2" type="radio" name="star" value='5'/>
                 <label class="star star-5" for="star-5-2"></label>
-                <input class="star star-4" id="star-4-2" type="radio" name="star"/>
+                <input class="star star-4" onclick = "commenting()" id="star-4-2" type="radio" name="star"value='4'/>
                 <label class="star star-4" for="star-4-2"></label>
-                <input class="star star-3" id="star-3-2" type="radio" name="star"/>
+                <input class="star star-3" onclick = "commenting()" id="star-3-2" type="radio" name="star"value='3'/>
                 <label class="star star-3" for="star-3-2"></label>
-                <input class="star star-2" id="star-2-2" type="radio" name="star"/>
+                <input class="star star-2" onclick = "commenting()" id="star-2-2" type="radio" name="star"value='2'/>
                 <label class="star star-2" for="star-2-2"></label>
-                <input class="star star-1" id="star-1-2" type="radio" name="star"/>
+                <input class="star star-1" onclick = "commenting()" id="star-1-2" type="radio" name="star"value='1'/>
+                <input hidden type = "text" name = "rating" id = "rating"/>
                 <label class="star star-1" for="star-1-2"></label>
                 <div class="rev-box">
-                    <textarea class="review" id = "review" col="30" name="review"></textarea>
-                    <label class="review" for="review">Breif Review</label>
+                    <textarea class="review" onKeyUp= "commenting()" id = "review" col="30" name="content"></textarea>
+                    <button type="submit">Submit</button>
                 </div>
 `           </form>                
         </div>
@@ -202,19 +204,19 @@
     <p style = "margin-left : 10%;">Reviews</p>
     <div class = "cont">
         <div class="stars">
-        <form action="">
-            <input class="star star-5" id="star-5" type="radio" name="star"/>
+        <div>
+            <input class="star star-5" id="star-5" type="radio" name="star2"/>
             <label class="star star-5" for="star-5"></label>
-            <input class="star star-4" id="star-4" type="radio" name="star"/>
+            <input class="star star-4" id="star-4" type="radio" name="star2"/>
             <label class="star star-4" for="star-4"></label>
-            <input class="star star-3" id="star-3" type="radio" name="star"/>
+            <input class="star star-3" id="star-3" type="radio" name="star2"/>
             <label class="star star-3" for="star-3"></label>
-            <input class="star star-2" id="star-2" type="radio" name="star"/>
+            <input class="star star-2" id="star-2" type="radio" name="star2"/>
             <label class="star star-2" for="star-2"></label>
-            <input class="star star-1" id="star-1" type="radio" name="star"/>
+            <input class="star star-1" id="star-1" type="radio" name="star2"/>
             <label class="star star-1" for="star-1"></label>
             
-        </form>
+        </div>
         </div>
             <p>Good Tour</p>
         </div>
@@ -237,5 +239,25 @@
         
         <!-- Footer-->
         @includeIf('partials.scriptjs')
+        <script>
+            function rating(){
+                var count = 0;
+                ratings = document.getElementsByName("star")
+                for (let index = 0; index < ratings.length; index++) {
+                    const element = ratings[index];
+                    
+                    if(element.checked == false){    
+                        count++;
+                    }
+                }
+                return count
+            }
+            
+            
+            function commenting(){
+                console.log(document.querySelector('input[name="star"]:checked').value)
+                document.getElementById("rating").value = document.querySelector('input[name="star"]:checked').value
+            }       
+        </script>
     </body>
 </html>
