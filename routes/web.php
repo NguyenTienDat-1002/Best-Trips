@@ -54,7 +54,8 @@ Route::middleware('admin')->group(function(){
 Route::middleware('customer')->group(function(){
 
     Route::get('/tour/{id}/book','TourController@book')->name('tour.book');
-    Route::post('/tour/{id}/book','TourController@payment');
+    Route::get('/payment/{id}','TourController@payment');
+
 
 });
 
@@ -73,3 +74,4 @@ Route::get('/time', function(){
     return Carbon::now()->toDateTimeString();
 });
 
+Route::post('/api/addComment', 'ApiController@addComment');
