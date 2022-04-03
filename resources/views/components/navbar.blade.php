@@ -19,7 +19,7 @@
                     <a class="dropdown-toggle nav-link px-lg-3 py-3 py-lg-4" id="navbarDropdown" href="{{ url('/login') }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::guard()->user()->username}}</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="{{route('history')}}">History</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="{{ url('/logout') }}">Logout</a></li>
                     </ul>

@@ -7,7 +7,17 @@
    
    <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'>
    <link rel="stylesheet" href="{{URL::asset('css/rating.css')}}">
-
+    <style>
+        .avatar {
+                vertical-align: middle;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+            .noHover{
+                pointer-events: none !important;
+            }
+    </style>
 </head>
     <body>
         <!-- Navigation-->
@@ -90,14 +100,17 @@
                         <p><h3>Rate Tour</h3></p>
                     </div>
                     <div class="container px-4 px-lg-5 my-5">
-                    <form>
-                    <p>Dear Customer,<br>
-                        Thank you for getting your car services at our workshop. We would like to know how we performed. Please spare some moments to give us your valuable feedback as it will help us in improving our service.</p>
+                        <p>Dear Customer,<br>
+                    Thank you for getting your car services at our workshop. We would like to know how we performed. Please spare some moments to give us your valuable feedback as it will help us in improving our service.</p>
+                    <div style="float: left; padding-top:30px">
+                        <img src="{{URL::asset('/img/avatar/avatar.png')}}" alt="Avatar" class="avatar" >
+                    </div>
+                    <form style="display: inline-block;" method="POST">
                     <label>Rate:</label>
                     <span class="star-rating">
-                        <input type="radio" name="rating" value="1"><i></i>
-                        <input type="radio" name="rating" value="2"><i></i>
-                        <input type="radio" name="rating" value="3"><i></i>
+                        <input type="radio" name="rating" value="1" ><i></i>
+                        <input type="radio" name="rating" value="2" ><i></i>
+                        <input type="radio" name="rating" value="3" ><i></i>
                         <input type="radio" name="rating" value="4"><i></i>
                         <input type="radio" name="rating" value="5"><i></i>
                     </span></br>
@@ -108,8 +121,7 @@
                     </form>
                     </div>
                     @endif  
-                </div>
-                             
+                </div>               
             </div>
         </div>
     </div>
@@ -118,6 +130,13 @@
     <section class="py-5">
         <div class="container px-4 px-lg-5 my-5">
             <p ><h2>Reviews</h2></p>
+            <span class="star-rating" >
+                <input type="radio" name="rating" disabled value="1" class="noHover"><i></i>
+                <input type="radio" name="rating" disabled value="2" class="noHover"><i></i>
+                <input type="radio" name="rating"  disabled value="3" class="noHover"><i></i>
+                <input type="radio" name="rating" disabled checked value="4" class="noHover"><i></i>
+                <input type="radio" name="rating" disabled value="5" class="noHover"><i></i>
+            </span></br>
         </div>
     </section>
         <!-- Related items section-->

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use App\Models\Province;
+use App\Models\Comments;
 
 class TourController extends Controller
 {
@@ -66,6 +67,7 @@ class TourController extends Controller
                 'img'=>'http://127.0.0.1:8000/storage/'.$request->file('img')->storeAs('tours/img', $tour->id.'.'.$request->file('img')->getClientOriginalExtension(), 'public'),
                 'video'=>'http://127.0.0.1:8000/storage/'.$request->file('video')->storeAs('tours/video', $tour->id.'.'.$request->file('video')->getClientOriginalExtension(), 'public'),
             ]);
+            
     
             DB::commit();
 
@@ -92,7 +94,7 @@ class TourController extends Controller
         $Prices = Tour::select('*')->where('id',"!=",$tour->id)->whereRaw("price*(100-sales)/100 between {$tour->price}*0.9 And {$tour->price}*1.1")->get();
         
         if($Prices->count()>=4)
-            $tours=$tours->random(4); 
+            $Prices=$Prices->random(4); 
 
         $overview=Storage::disk('local')->get($tour->overview);
         $description=Storage::disk('local')->get($tour->description);
@@ -183,7 +185,7 @@ class TourController extends Controller
         if($request->province)
             $tours->where('departure_point',$request->province);
         //dd($request);
-        return view('tours',['tours'=> $tours->paginate(),'provinces'=>$provinces]);
+        return view('tours',['tours'=> $tours->paginate(12),'provinces'=>$provinces]);
 
     }
 
