@@ -9,7 +9,7 @@
    <link rel="stylesheet" href="{{URL::asset('css/rating.css')}}">
     <style>
         .avatar {
-                vertical-align: middle;
+                vertical-align: baseline;
                 width: 50px;
                 height: 50px;
                 border-radius: 50%;
@@ -66,79 +66,95 @@
                     </div>
                 </div>
             </div>
-            <div class="container px-4 px-lg-5 my-5">
-                <p class="lead"><h2>Description</h2> 
-                    <div class="textarea">{!!$description!!}</div>
-                </p>
-            </div>
-            <div class="container px-4 px-lg-5 my-5">
-                <p class="lead"><h2>Video</h2> 
-                    <center><video controls class="tour_video">
-                        <source src="{{$tour->video}}" type="video/{{pathinfo($tour->video, PATHINFO_EXTENSION);}}">
-                      Your browser does not support the video tag.
-                    </video></center>
-                </p>
-            </div>
+
             <div class="container px-4 px-lg-5 my-5">
                 <p class="lead"><h2>Overview</h2> 
                     <div class="textarea">{!!$overview!!}</div>
                 </p>
             </div>
 
-        </section>
-        
-    
-    
-    <section class="py-5">
-        <div class="rt-container">
-              <div class="col-rt-12">
-                  <div class="Scriptcontent">
-                  
-                    <div>
+            <div class="container px-4 px-lg-5 my-5">
+                <p class="lead"><h2>Description</h2> 
+                    <div class="textarea">{!!$description!!}</div>
+                </p>
+            </div>
+
+            <div class="container px-4 px-lg-5 my-5">
+                <p class="lead"><h2>Video</h2> 
+                    <center>
+                        <video controls class="tour_video">
+                            <source src="{{$tour->video}}" type="video/{{pathinfo($tour->video, PATHINFO_EXTENSION);}}">
+                            Your browser does not support the video tag.
+                        </video>
+                    </center>
+                </p>
+            </div>
+
+            <div class="rt-container">
+                <div class="col-rt-12">
+                    <div class="Scriptcontent">             
                     @if(Auth::check())
-                    <div class="container px-4 px-lg-5 my-5">
-                        <p><h3>Rate Tour</h3></p>
+                        <div class="container px-4 px-lg-5 my-5">
+                            <p><h3>Rate Tour</h3></p>
+                        </div>
+                        <div class="container px-4 px-lg-5 my-5">
+                            <p>Dear Customer,<br>
+                                Thank you for getting your car services at our workshop.
+                                We would like to know how we performed. Please spare some moments to give us
+                                your valuable feedback as it will help us in improving our service.
+                            </p>
+                            <div style="float: left; padding-top:0px">
+                                <img src="{{URL::asset('/img/avatar/avatar.png')}}" alt="Avatar" class="avatar" >
+                            </div>
+                            <form  style="display: inline-block;line-height: 1.25rem" method="POST" action="{{route('comment',['tour_id'=>$tour->id])}}">
+                                @csrf
+                                <label>Rate:</label>
+                                <span class="star-rating">
+                                    <input type="radio" name="rating" value="1" ><i></i>
+                                    <input type="radio" name="rating" value="2" ><i></i>
+                                    <input type="radio" name="rating" value="3" ><i></i>
+                                    <input type="radio" name="rating" value="4"><i></i>
+                                    <input type="radio" name="rating" value="5"><i></i>
+                                </span></br>
+                                <label for="m_3189847521540640526commentText">Comment:</label><br/>
+                                <textarea cols="75" name="content" rows="5" style="width: 100%; resize:none" ></textarea><br>
+                                <div class="clear"></div> 
+                                <input style="background:#43a7d5;color:#fff;padding:12px;border:0" type="submit" value="Submit">&nbsp;
+                            </form>
+                        </div>
+                    @endif  
                     </div>
-                    <div class="container px-4 px-lg-5 my-5">
-                        <p>Dear Customer,<br>
-                    Thank you for getting your car services at our workshop. We would like to know how we performed. Please spare some moments to give us your valuable feedback as it will help us in improving our service.</p>
-                    <div style="float: left; padding-top:30px">
+                </div>
+            </div>
+            <div class="container px-4 px-lg-5 my-5">
+                <p><h3>Reviews</h3></p>
+                @foreach ($comments as $comment )
+                <div style="display: block; line-height: 1.25rem; " >
+                    <div style="display:inline-block;">
                         <img src="{{URL::asset('/img/avatar/avatar.png')}}" alt="Avatar" class="avatar" >
                     </div>
-                    <form style="display: inline-block;" method="POST">
-                    <label>Rate:</label>
-                    <span class="star-rating">
-                        <input type="radio" name="rating" value="1" ><i></i>
-                        <input type="radio" name="rating" value="2" ><i></i>
-                        <input type="radio" name="rating" value="3" ><i></i>
-                        <input type="radio" name="rating" value="4"><i></i>
-                        <input type="radio" name="rating" value="5"><i></i>
+                    <div style="display: inline-block;vertical-align: super !important">
+                    @if($comment->rate!=0)
+                    <span class="star-rating"> 
+                            @for ( $i= 1; $i<=5 ; $i++)
+                                @if ($i==$comment->rate)
+                                    <input type="radio" disabled checked value="{{$i}}" class="noHover"><i></i>
+                                @else
+                                    <input type="radio" disabled value="{{$i}}" class="noHover"><i></i>
+                                @endif
+                                
+                            @endfor                       
                     </span></br>
-                    <label for="m_3189847521540640526commentText">Comment:</label><br/>
-                        <textarea cols="75" name="commentText" rows="5" style="width: 100%;" ></textarea><br>
-                    <div class="clear"></div> 
-                        <input style="background:#43a7d5;color:#fff;padding:12px;border:0" type="submit" value="Submit">&nbsp;
-                    </form>
+                    @endif
+                    <div >
+                        <div style="display: inline-block;" >{{$comment->user->username}} : </div>
+                        <div  style="display: inline-block;">{{$comment->content}}</div><br>
                     </div>
-                    @endif  
-                </div>               
+                    </div>
+                </div></br>
+                @endforeach
             </div>
-        </div>
-    </div>
-    </section>
-     
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <p ><h2>Reviews</h2></p>
-            <span class="star-rating" >
-                <input type="radio" name="rating" disabled value="1" class="noHover"><i></i>
-                <input type="radio" name="rating" disabled value="2" class="noHover"><i></i>
-                <input type="radio" name="rating"  disabled value="3" class="noHover"><i></i>
-                <input type="radio" name="rating" disabled checked value="4" class="noHover"><i></i>
-                <input type="radio" name="rating" disabled value="5" class="noHover"><i></i>
-            </span></br>
-        </div>
-    </section>
+        </section>
         <!-- Related items section-->
     <section class="py-5 bg-light">
         <div class="container px-4 px-lg-5 mt-5">

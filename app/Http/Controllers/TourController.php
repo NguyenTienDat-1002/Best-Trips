@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use App\Models\Province;
-use App\Models\Comments;
+use App\Models\Comment;
+use App\Models\Tour_Highlight;
 
 class TourController extends Controller
 {
@@ -67,6 +68,21 @@ class TourController extends Controller
                 'img'=>'http://127.0.0.1:8000/storage/'.$request->file('img')->storeAs('tours/img', $tour->id.'.'.$request->file('img')->getClientOriginalExtension(), 'public'),
                 'video'=>'http://127.0.0.1:8000/storage/'.$request->file('video')->storeAs('tours/video', $tour->id.'.'.$request->file('video')->getClientOriginalExtension(), 'public'),
             ]);
+
+            $highlights=$request->file('hightlight');
+            
+            if(isset($highlights)){
+                for($i=0;$i<count($highlights);$i++) {
+                    if(isset($highlights[$i])){
+                        $temp=Tour_Highlight::create([
+                            'tour_id'=>$tour->id,
+                        ]);
+                        $temp->update([
+                            'highlight'=>'http://127.0.0.1:8000/storage/'.$highlights[$i]->storeAs('tours/highlights', $temp->id.'.'.$highlights[$i]->getClientOriginalExtension(), 'public')
+                        ]);
+                    }
+                }
+            }
             
     
             DB::commit();
@@ -98,8 +114,9 @@ class TourController extends Controller
 
         $overview=Storage::disk('local')->get($tour->overview);
         $description=Storage::disk('local')->get($tour->description);
-        $comments=$tour->comments;
-         return view('tourdetails', ['tour' => $tour, 'Prices' => $Prices, 
+        $comments=Comment::where('tour_id',$tour->id)->orderBy('time','DESC')->get();
+        
+        return view('tourdetails', ['tour' => $tour, 'Prices' => $Prices, 
                      'overview'=>str_replace("\n",'<br>',$overview), 
                      'comments'=> $comments,
                      'description'=>str_replace("\n",'<br>',$description)]);
@@ -120,6 +137,7 @@ class TourController extends Controller
         $description=Storage::disk('local')->get($tour->description);
 
         $provinces=Province::all();
+
         return view('editTour')->with(['tour' => $tour, 
         'overview'=>str_replace("\n",'<br>',$overview), 
         'description'=>str_replace("\n",'<br>',$description),

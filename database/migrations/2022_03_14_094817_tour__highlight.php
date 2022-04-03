@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('Tour_Highlight', function (Blueprint $table){
             $table->increments('id');
             $table->integer('tour_id')->unsigned();
-            $table->string('highlight');
+            $table->string('highlight')->nullable();
             $table->foreign('tour_id')->references('id')->on('Tour');
         });
     }
