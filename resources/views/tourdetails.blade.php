@@ -144,8 +144,9 @@
                                 @endif
                                 
                             @endfor                       
-                    </span></br>
+                    </span> -
                     @endif
+                    <span> {{date('h:i d/m/Y',strtotime($comment->time))}} </span></br>
                     <div >
                         <div style="display: inline-block;" >{{$comment->user->username}} : </div>
                         <div  style="display: inline-block;">{{$comment->content}}</div><br>
@@ -153,6 +154,11 @@
                     </div>
                 </div></br>
                 @endforeach
+                <div style="margin-left: 13%; margin-right: 13%; height:55px "  >
+                    <div style="margin-right: 0px; float:right; margin:10px; margin-right:30px" >
+                       {{$comments->links()}}
+                    </div>
+                 </div>
             </div>
         </section>
         <!-- Related items section-->

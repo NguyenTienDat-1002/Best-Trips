@@ -70,7 +70,7 @@ class TourController extends Controller
             ]);
 
             $highlights=$request->file('hightlight');
-            
+
             if(isset($highlights)){
                 for($i=0;$i<count($highlights);$i++) {
                     if(isset($highlights[$i])){
@@ -87,7 +87,7 @@ class TourController extends Controller
     
             DB::commit();
 
-            return redirect()->back();
+            return redirect(route('tourDetails',['id'=>$tour->id]));
 
         }catch(e){
             DB::rollback();
@@ -114,7 +114,7 @@ class TourController extends Controller
 
         $overview=Storage::disk('local')->get($tour->overview);
         $description=Storage::disk('local')->get($tour->description);
-        $comments=Comment::where('tour_id',$tour->id)->orderBy('time','DESC')->get();
+        $comments=Comment::where('tour_id',$tour->id)->orderBy('time','DESC')->paginate();
         
         return view('tourdetails', ['tour' => $tour, 'Prices' => $Prices, 
                      'overview'=>str_replace("\n",'<br>',$overview), 
@@ -135,9 +135,9 @@ class TourController extends Controller
         
         $overview=Storage::disk('local')->get($tour->overview);
         $description=Storage::disk('local')->get($tour->description);
-
+        
         $provinces=Province::all();
-
+        
         return view('editTour')->with(['tour' => $tour, 
         'overview'=>str_replace("\n",'<br>',$overview), 
         'description'=>str_replace("\n",'<br>',$description),

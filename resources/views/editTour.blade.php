@@ -32,7 +32,7 @@
                                         <div class="w3-row-padding">
                                             <p class="w3-third">
                                             <label class="w3-text-grey" for="title">Title</label>
-                                              <input class="w3-input w3-border" type="text" id="title" name="title" value={{$tour->title}} required>
+                                              <input class="w3-input w3-border" type="text" id="title" name="title" value="{{$tour->title}}" required>
                                             </p>
                                             <p class="w3-third">      
                                                <label class="w3-text-grey" for="price">Price</label>
