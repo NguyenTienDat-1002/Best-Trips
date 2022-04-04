@@ -14,10 +14,205 @@
                 height: 50px;
                 border-radius: 50%;
             }
-            .noHover{
-                pointer-events: none !important;
-            }
+        .noHover{
+            pointer-events: none !important;
+        }
+        /* begin external css: flickity.css
+/*! Flickity v2.0.4
+ * https://npmcdn.com/flickity@2/dist/flickity.css
+https://flickity.metafizzy.co
+---------------------------------------------- */
+
+.flickity-enabled {
+  position: relative;
+}
+
+.flickity-enabled:focus { outline: none; }
+
+.flickity-viewport {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+
+.flickity-slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* draggable */
+
+.flickity-enabled.is-draggable {
+  -webkit-tap-highlight-color: transparent;
+          tap-highlight-color: transparent;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.flickity-enabled.is-draggable .flickity-viewport {
+  cursor: move;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+/* ---- previous/next buttons ---- */
+
+.flickity-prev-next-button {
+  position: absolute;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: white;
+  background: hsla(0, 0%, 100%, 0.75);
+  cursor: pointer;
+  /* vertically center */
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.flickity-prev-next-button:hover { background: white; }
+
+.flickity-prev-next-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 5px #09F;
+}
+
+.flickity-prev-next-button:active {
+  opacity: 0.6;
+}
+
+.flickity-prev-next-button.previous { left: 10px; }
+.flickity-prev-next-button.next { right: 10px; }
+/* right to left */ */
+/* .flickity-rtl .flickity-prev-next-button.previous { */
+/*   left: auto; */
+/*   right: 10px; */
+/* } */
+/* .flickity-rtl .flickity-prev-next-button.next { */
+/*   right: auto; */
+/*   left: 10px; */
+/* } */
+
+.flickity-prev-next-button:disabled {
+  opacity: 0.3;
+  cursor: auto;
+}
+
+.flickity-prev-next-button svg {
+  position: absolute;
+  left: 20%;
+  top: 20%;
+  width: 60%;
+  height: 60%;
+}
+
+.flickity-prev-next-button .arrow {
+  fill: #333;
+}
+
+/* ---- page dots ---- */
+
+/* .flickity-page-dots { */
+/*   position: absolute; */
+/*   width: 100%; */
+/*   bottom: -25px; */
+/*   padding: 0; */
+/*   margin: 0; */
+/*   list-style: none; */
+/*   text-align: center; */
+/*   line-height: 1; */
+/* } */
+/*  */
+/* .flickity-rtl .flickity-page-dots { direction: rtl; } */
+/*  */
+/* .flickity-page-dots .dot { */
+/*   display: inline-block; */
+/*   width: 10px; */
+/*   height: 10px; */
+/*   margin: 0 8px; */
+/*   background: #333; */
+/*   border-radius: 50%; */
+/*   opacity: 0.25; */
+/*   cursor: pointer; */
+/* } */
+/*  */
+/* .flickity-page-dots .dot.is-selected { */
+/*   opacity: 1; */
+/* } */
+
+/* end external css: flickity.css */
+/*! Flickity v2.0.4
+https://flickity.metafizzy.co
+---------------------------------------------- */
+
+* { box-sizing: border-box; }
+
+.carousel {
+  background: #FAFAFA;
+}
+
+.carousel-main {
+  margin-bottom: 8px;
+}
+
+.carousel-cell {
+  width: 100%;
+  height: 504px;
+  margin-right: 8px;
+  background: #8C8;
+  border-radius: 5px;
+  /* counter-increment: carousel-cell; */
+}
+
+/* cell number */ 
+/* .carousel-cell:before { */
+/*   display: block; */
+/*   text-align: center; */
+/*   content: counter(carousel-cell); */
+/*   line-height: 200px; */
+/*   font-size: 80px; */
+/*   color: white; */
+/* } */
+
+.carousel-nav .carousel-cell {
+  height: 90px;
+  width: 120px;
+}
+
+/* .carousel-nav .carousel-cell:before { */
+/*   font-size: 50px; */
+/*   line-height: 80px; */
+/* } */
+
+/* .carousel-nav .carousel-cell.is-nav-selected { */
+/*   background: #ED2; */
+/* } */
+
+/* Atelierbram edit */
+.carousel-main img {
+  display: block;
+  margin: 0 auto; 
+}
+
+.container1 {
+  width:80%;
+  margin: 0 auto;
+}
+
+
+    
     </style>
+            <script src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js"></script>
 </head>
     <body>
         <!-- Navigation-->
@@ -73,6 +268,28 @@
                 </p>
             </div>
 
+
+            <div class="container px-4 px-lg-5 my-5">
+                <p class="lead"><h2>Highlight:</h2> 
+                <div class="container1">
+                <!-- Flickity HTML init -->
+                <div class="carousel carousel-main" data-flickity='{"pageDots": false }'>
+                    @foreach ($tour->tour_highlights as $highlight )
+                        <div class="carousel-cell"><img src="{{$highlight->highlight}}" width="100%" height="100%"/></div>
+                    @endforeach
+                </div>
+                
+                <div class="carousel carousel-nav"
+                data-flickity='{ "asNavFor": ".carousel-main", "contain": true, "pageDots": false }'>
+                @foreach ($tour->tour_highlights as $highlight)
+                    <div class="carousel-cell"><img src="{{$highlight->highlight}}" width="120" height="90"/></div>
+                @endforeach
+                </div>
+                
+                </div><!-- /.container -->
+
+            </div>
+
             <div class="container px-4 px-lg-5 my-5">
                 <p class="lead"><h2>Description</h2> 
                     <div class="textarea">{!!$description!!}</div>
@@ -82,7 +299,7 @@
             <div class="container px-4 px-lg-5 my-5">
                 <p class="lead"><h2>Video</h2> 
                     <center>
-                        <video controls class="tour_video">
+                        <video controls class="tour_video" width="50%" height="100%">
                             <source src="{{$tour->video}}" type="video/{{pathinfo($tour->video, PATHINFO_EXTENSION);}}">
                             Your browser does not support the video tag.
                         </video>
@@ -165,7 +382,7 @@
     <section class="py-5 bg-light">
         <div class="container px-4 px-lg-5 mt-5">
             @if($Prices->count())
-            <h2 class="fw-bolder mb-4">Other tours</h2>
+            <h2 class="fw-bolder mb-4">Same tours</h2>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 @foreach ($Prices as $i=>$value )
                     <x-tour-item :tour="$value"/>
@@ -175,9 +392,10 @@
         </div>
     </section>
     
-        
+        <x-footer/>
         <!-- Footer-->
         @includeIf('partials.scriptjs')
+
         <script>
             function rating(){
                 var count = 0;

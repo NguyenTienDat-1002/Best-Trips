@@ -4,7 +4,7 @@
         @if($tour->sales!=0)
             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">{{$tour->sales}}% Sale</div>
         @endif
-        <img class="card-img-top" src="{{$tour->img}}" alt="{{$tour->title}}" />
+        <img class="card-img-top" width="300px" height="300px" src="{{$tour->img}}" alt="{{$tour->title}}" />
         <!-- Product details-->
         <div class="card-body p-4">
             <div class="text-center">

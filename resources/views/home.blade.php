@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
     <link rel="mask-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
 <style>
@@ -139,7 +138,7 @@ input[type="text"] {
     </style>
     <x-header/>
 </head>
-    <body>
+    <body >
         <!-- Navigation-->
         <x-navbar/>
         <!-- Page Header-->
@@ -174,7 +173,7 @@ input[type="text"] {
             </div>
         </header>
         <!-- Main Content-->
-        <section class=" bg-light" style=" padding-top: 3rem ">
+        <section class="bg-light" style=" padding-top: 3rem" >
             <div class="container px-4 px-lg-5">
                 @if($lowest)
                 <h2 class="fw-bolder mb-4">Lowest price:</h2>
