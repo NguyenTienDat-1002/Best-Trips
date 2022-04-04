@@ -3,6 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500" rel="stylesheet" />
     <link href="{{URL::asset('css/main1.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{URL::asset('css/rating.css')}}">
     <x-header />
 </head>
     <body>

@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('sales')->default(0);
             $table->string('video')->nullable();
             $table->string('description')->nullable();
+            $table->integer('rate')->default(3);
             $table->foreign('departure_point')->references('id')->on('Province');
         });
     }

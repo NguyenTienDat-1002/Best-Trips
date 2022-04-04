@@ -3,6 +3,7 @@
 <head>
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
     <link rel="mask-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+    <link rel="stylesheet" href="{{URL::asset('css/rating.css')}}">
 <style>
     @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 

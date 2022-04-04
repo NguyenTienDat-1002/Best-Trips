@@ -10,6 +10,18 @@
             <div class="text-center">
                 <!-- Product name-->
                 <h5 class="fw-bolder">{{$tour->title}}</h5>
+                <div>
+                    <span class="star-rating"> 
+                        @for ( $i= 1; $i<=5 ; $i++)
+                            @if ($i==$tour->rate)
+                                <input type="radio" disabled checked value="{{$i}}" class="noHover"><i></i>
+                            @else
+                                <input type="radio" disabled value="{{$i}}" class="noHover"><i></i>
+                            @endif
+                            
+                        @endfor                       
+                    </span>
+                </div>
                 <!-- Product price-->
                 @if($tour->sales!=0)
                 <span class="text-muted text-decoration-line-through">${{$tour->price}}</span>

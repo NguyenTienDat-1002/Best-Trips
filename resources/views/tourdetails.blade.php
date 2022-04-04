@@ -228,8 +228,20 @@ https://flickity.metafizzy.co
                         <p class="small mb-1">SKU: BST-{{$tour->id}}</p>
                         <h1 class="display-5 fw-bolder mb-3">{{$tour->title}}</h1>
                         <div class="fs-5 mb-1">
+                            <div>
+                            <span class="star-rating"> 
+                                @for ( $i= 1; $i<=5 ; $i++)
+                                    @if ($i==$tour->rate)
+                                        <input type="radio" disabled checked value="{{$i}}" class="noHover"><i></i>
+                                    @else
+                                        <input type="radio" disabled value="{{$i}}" class="noHover"><i></i>
+                                    @endif
+                                    
+                                @endfor                       
+                            </span>
+                            </div>
                             @if($tour->sales!=0)
-                                <span class="text-decoration-line-through">{{$tour->price}}</span>
+                                <span class="text-decoration-line-through">${{$tour->price}}</span>
                                 <span>${{$tour->price*(100-$tour->sales)/100}}</span>
                             @else
                                 <span>${{$tour->price}}</span>
@@ -316,7 +328,7 @@ https://flickity.metafizzy.co
                         </div>
                         <div class="container px-4 px-lg-5 my-5">
                             <p>Dear Customer,<br>
-                                Thank you for getting your car services at our workshop.
+                                Thank you for your faith.
                                 We would like to know how we performed. Please spare some moments to give us
                                 your valuable feedback as it will help us in improving our service.
                             </p>
