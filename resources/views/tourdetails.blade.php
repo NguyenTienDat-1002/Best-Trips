@@ -247,7 +247,7 @@ https://flickity.metafizzy.co
                                 <span>${{$tour->price}}</span>
                             @endif
                         </div>
-                        <p class="lead">Duration: {{$tour->duration}}</p>
+                        <p class="lead">Duration: {{$tour->duration}} Days</p>
                         <p class="lead">Departure point: {{$tour->province->province}}</p>
                         <p class="lead">Departure time: {{date('d/m/Y',strtotime($tour->departure_date))}}</p>
                         <div class="d-flex">

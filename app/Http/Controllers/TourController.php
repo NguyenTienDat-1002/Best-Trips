@@ -188,6 +188,10 @@ class TourController extends Controller
     public function destroy($id)
     {
         //
+        $highlights=Tour_Highlight::where('tour_id',$id);
+        $highlights->delete();
+        $comments = Comment::where('tour_id',$id);
+        $comments->delete();
         $tour = Tour::where('id',$id);
         $tour->delete();
         return redirect(url('/tours'));

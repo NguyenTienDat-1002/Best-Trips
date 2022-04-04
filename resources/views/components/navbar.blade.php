@@ -16,7 +16,7 @@
                 
                 @if (Auth::guard()->check())
                 <li class="nav-item dropdown">
-                    <a class="dropdown-toggle nav-link px-lg-3 py-3 py-lg-4" id="navbarDropdown" href="{{ url('/login') }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::guard()->user()->username}}</a>
+                    <a class="dropdown-toggle nav-link px-lg-3 py-3 py-lg-4" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::guard()->user()->username}}</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">Action</a></li>
                         @if(Auth::guard()->check()&& Auth::guard()->user()->role=="Customer")

@@ -24,4 +24,8 @@ class Tour extends Model
     public function tour_highlights(){
         return $this->hasMany('App\Models\Tour_Highlight', 'tour_id','id');
     }
+
+    public function booking(){
+        return $this->hasMany('App\Models\Booking', 'tour_id', 'id');
+    }
 }

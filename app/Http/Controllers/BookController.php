@@ -46,7 +46,7 @@ class BookController extends Controller
     }
 
     public function history(){
-        $booked = Booking::where('user_id',Auth::user()->id)->get();
-        return dd($booked);
+        $books = Booking::where('user_id',Auth::user()->id)->get();
+        return view('history', ['books'=>$books]);
     }
 }
