@@ -12,6 +12,7 @@ use Illuminate\Support\Collection;
 use App\Models\Province;
 use App\Models\Comment;
 use App\Models\Tour_Highlight;
+use App\Models\Booking;
 
 class TourController extends Controller
 {
@@ -188,6 +189,8 @@ class TourController extends Controller
     public function destroy($id)
     {
         //
+        $books= Booking::where('tour_id',$id);
+        $books->delete();
         $highlights=Tour_Highlight::where('tour_id',$id);
         $highlights->delete();
         $comments = Comment::where('tour_id',$id);
