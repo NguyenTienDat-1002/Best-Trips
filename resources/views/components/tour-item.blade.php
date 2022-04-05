@@ -4,12 +4,24 @@
         @if($tour->sales!=0)
             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">{{$tour->sales}}% Sale</div>
         @endif
-        <img class="card-img-top" src="{{$tour->img}}" alt="{{$tour->title}}" />
+        <img class="card-img-top" width="300px" height="300px" src="{{$tour->img}}" alt="{{$tour->title}}" />
         <!-- Product details-->
         <div class="card-body p-4">
             <div class="text-center">
                 <!-- Product name-->
                 <h5 class="fw-bolder">{{$tour->title}}</h5>
+                <div>
+                    <span class="star-rating"> 
+                        @for ( $i= 1; $i<=5 ; $i++)
+                            @if ($i==$tour->rate)
+                                <input type="radio" disabled checked value="{{$i}}" class="noHover"><i></i>
+                            @else
+                                <input type="radio" disabled value="{{$i}}" class="noHover"><i></i>
+                            @endif
+                            
+                        @endfor                       
+                    </span>
+                </div>
                 <!-- Product price-->
                 @if($tour->sales!=0)
                 <span class="text-muted text-decoration-line-through">${{$tour->price}}</span>

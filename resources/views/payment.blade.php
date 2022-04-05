@@ -222,31 +222,37 @@ input:focus:-ms-input-placeholder {
 </head>
 <body>
     <div class="card mt-50 mb-50">
-        <span><a href="{{URL::asset('/')}}">Back to home</a></span>
-        <div class="card-title mx-auto"> Settings </div>
+        <span><a href="{{route('home')}}">Back to home</a></span>
+        <div class="card-title mx-auto"> Payment </div>
         <div class="nav">
             <ul class="mx-auto">
-                <li class="active"><a >Payment</a></li>
+                <li class="active"><a >Price: {{$price}}$</a></li>
             </ul>
         </div>
-        
-        <form> <span id="card-header">Your cards:</span>
-            
+        <form action="{{route('payment')}}" method="POST"> <span id="card-header">Your cards:</span>
+            @csrf
+            <input name="tour_id" value="{{$tour_id}}" hidden>
+            <input name="email" value="{{$email}}" hidden>
+            <input name="phone" value="{{$phone}}" hidden>
+            <input name="adults" value="{{$adults}}" hidden>
+            <input name="children" value="{{$children}}" hidden>
+            <input name="address" value="{{$address}}" hidden>
+            <input name="price" value="{{$price}}" hidden>
             <div class="row-1">
                 <div class="row row-2"> <span id="card-inner">Card holder name</span> </div>
-                <div class="row row-2"> <input type="text" placeholder="Bojan Viner"> </div>
+                <div class="row row-2"> <input type="text" placeholder="Bojan Viner" name="name"> </div>
             </div>
             <div class="row three">
                 <div class="col-7">
                     <div class="row-1">
                         <div class="row row-2"> <span id="card-inner">Card number</span> </div>
-                        <div class="row row-2"> <input type="text" placeholder="5134-5264-4"> </div>
+                        <div class="row row-2"> <input type="text" placeholder="5134-5264-4" name="Card"> </div>
                     </div>
                 </div>
                 <div class="col-2"> <input type="text" placeholder="Exp. date"> </div>
                 <div class="col-2"> <input type="text" placeholder="CVV"> </div>
-            </div> <button class="btn d-flex mx-auto"><b>Add card</b></a>
-                   <a class="btn d-flex mx-auto"><b>Cancel</b></a>
+            </div> <button type="submit" class="btn d-flex mx-auto"><b>Add card</b></button>
+                   <a href="{{route('tourDetails',['id'=>$tour_id])}}"class="btn d-flex mx-auto"><b>Cancel</b></a>
         </form>
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>

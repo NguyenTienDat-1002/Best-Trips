@@ -12,4 +12,8 @@ class Tour_Highlight extends Model
     protected $primaryKey = "id";
     protected $guarded = [];
     public $timestamps = false;
+
+    public function tour(){
+        return $this->belongsTo('App\Models\Tour', 'tour_id', 'id');
+    }
 }

@@ -3,127 +3,222 @@
 <head>
    <x-header/>
 
-   <link rel="stylesheet" href="{{URL::asset('css/tourdetail.css')}}">
-   <style>
-    @import url(https://fonts.googleapis.com/css?family=Roboto:500,100,300,700,400);
-    *{
-    margin: 0;
-    padding: 0;
-    font-family: roboto;
-    }
-
-
-    .cont{
-    width: 93%;
-    max-width: 350px;
-    text-align: center;
-    margin: 4% left;
-    padding: 30px 0;
-    margin-left : 10%;
-    background: #fff;
-    color: #EEE;
-    border-radius: 5px;
-    border: thin solid #444;
-    overflow: hidden;
-    }
-
-    hr{
-    margin: 20px;
-    border: none;
-    border-bottom: thin solid rgba(255,255,255,.1);
-    }
-
-    div.title{
-    font-size: 2em;
-    }
-
-    h1 span{
-    font-weight: 300;
-    color: #Fd4;
-    }
-
-    div.stars{
-    width: 270px;
-    display: inline-block;
-    }
-
-    input.star{
-    display: none;
-    }
-
-    label.star {
-    float: right;
-    padding: 10px;
-    font-size: 20px;
-    color: #444;
-    transition: all .2s;
-    }
-
-    input.star:checked ~ label.star:before {
-    content:'\f005';
-    color: #FD4;
-    transition: all .25s;
-    }
-
-
-    input.star-5:checked ~ label.star:before {
-    color:#FE7;
-    text-shadow: 0 0 20px #952;
-    }
-
-    input.star-1:checked ~ label.star:before {
-    color: #F62;
-    }
-
-    label.star:hover{
-    transform: rotate(-15deg) scale(1.3);
-    }
-
-    label.star:before{
-    content:'\f006';
-    font-family: FontAwesome;
-    }
-
-    .rev-box{
-    overflow: hidden;
-    height: 0;
-    width: 100%;
-    transition: all .25s;
-    }
-
-    input.review{
-    background: gray;
-    border: none;
-    width: 100%;
-    max-width: 100%;
-    height: 100px;
-    padding: 10px;
-    box-sizing: border-box;
-    color: #EEE;
-    }
-
-    label.review{
-    display: block;
-    transition:opacity .25s;
-    }
-
-
-    input.star:checked ~ .rev-box{
-    height: 125px;
-    overflow: visible;
-    }
-
-   </style>
+   {{-- <link rel="stylesheet" href="{{URL::asset('css/tourdetail.css')}}"> --}}
+   
    <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'>
-    <script>
-        const TOUR_ID = {{$tour->id}}
-    </script>
+   <link rel="stylesheet" href="{{URL::asset('css/rating.css')}}">
+    <style>
+        .avatar {
+                vertical-align: baseline;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+        .noHover{
+            pointer-events: none !important;
+        }
+        /* begin external css: flickity.css
+/*! Flickity v2.0.4
+ * https://npmcdn.com/flickity@2/dist/flickity.css
+https://flickity.metafizzy.co
+---------------------------------------------- */
+
+.flickity-enabled {
+  position: relative;
+}
+
+.flickity-enabled:focus { outline: none; }
+
+.flickity-viewport {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+
+.flickity-slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* draggable */
+
+.flickity-enabled.is-draggable {
+  -webkit-tap-highlight-color: transparent;
+          tap-highlight-color: transparent;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.flickity-enabled.is-draggable .flickity-viewport {
+  cursor: move;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+/* ---- previous/next buttons ---- */
+
+.flickity-prev-next-button {
+  position: absolute;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: white;
+  background: hsla(0, 0%, 100%, 0.75);
+  cursor: pointer;
+  /* vertically center */
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.flickity-prev-next-button:hover { background: white; }
+
+.flickity-prev-next-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 5px #09F;
+}
+
+.flickity-prev-next-button:active {
+  opacity: 0.6;
+}
+
+.flickity-prev-next-button.previous { left: 10px; }
+.flickity-prev-next-button.next { right: 10px; }
+/* right to left */ */
+/* .flickity-rtl .flickity-prev-next-button.previous { */
+/*   left: auto; */
+/*   right: 10px; */
+/* } */
+/* .flickity-rtl .flickity-prev-next-button.next { */
+/*   right: auto; */
+/*   left: 10px; */
+/* } */
+
+.flickity-prev-next-button:disabled {
+  opacity: 0.3;
+  cursor: auto;
+}
+
+.flickity-prev-next-button svg {
+  position: absolute;
+  left: 20%;
+  top: 20%;
+  width: 60%;
+  height: 60%;
+}
+
+.flickity-prev-next-button .arrow {
+  fill: #333;
+}
+
+/* ---- page dots ---- */
+
+/* .flickity-page-dots { */
+/*   position: absolute; */
+/*   width: 100%; */
+/*   bottom: -25px; */
+/*   padding: 0; */
+/*   margin: 0; */
+/*   list-style: none; */
+/*   text-align: center; */
+/*   line-height: 1; */
+/* } */
+/*  */
+/* .flickity-rtl .flickity-page-dots { direction: rtl; } */
+/*  */
+/* .flickity-page-dots .dot { */
+/*   display: inline-block; */
+/*   width: 10px; */
+/*   height: 10px; */
+/*   margin: 0 8px; */
+/*   background: #333; */
+/*   border-radius: 50%; */
+/*   opacity: 0.25; */
+/*   cursor: pointer; */
+/* } */
+/*  */
+/* .flickity-page-dots .dot.is-selected { */
+/*   opacity: 1; */
+/* } */
+
+/* end external css: flickity.css */
+/*! Flickity v2.0.4
+https://flickity.metafizzy.co
+---------------------------------------------- */
+
+* { box-sizing: border-box; }
+
+.carousel {
+  background: #FAFAFA;
+}
+
+.carousel-main {
+  margin-bottom: 8px;
+}
+
+.carousel-cell {
+  width: 100%;
+  height: 504px;
+  margin-right: 8px;
+  background: #8C8;
+  border-radius: 5px;
+  /* counter-increment: carousel-cell; */
+}
+
+/* cell number */ 
+/* .carousel-cell:before { */
+/*   display: block; */
+/*   text-align: center; */
+/*   content: counter(carousel-cell); */
+/*   line-height: 200px; */
+/*   font-size: 80px; */
+/*   color: white; */
+/* } */
+
+.carousel-nav .carousel-cell {
+  height: 90px;
+  width: 120px;
+}
+
+/* .carousel-nav .carousel-cell:before { */
+/*   font-size: 50px; */
+/*   line-height: 80px; */
+/* } */
+
+/* .carousel-nav .carousel-cell.is-nav-selected { */
+/*   background: #ED2; */
+/* } */
+
+/* Atelierbram edit */
+.carousel-main img {
+  display: block;
+  margin: 0 auto; 
+}
+
+.container1 {
+  width:80%;
+  margin: 0 auto;
+}
+
+
+    
+    </style>
+            <script src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js"></script>
 </head>
     <body>
         <!-- Navigation-->
         <x-navbar/>
         <!-- Product section-->
-        <section class="py-5">
+        <section class="py-5" >
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6"><img class="tourimage card-img-top mb-5 mb-md-0" src="{{$tour->img}}" alt="..." />
@@ -133,14 +228,26 @@
                         <p class="small mb-1">SKU: BST-{{$tour->id}}</p>
                         <h1 class="display-5 fw-bolder mb-3">{{$tour->title}}</h1>
                         <div class="fs-5 mb-1">
+                            <div>
+                            <span class="star-rating"> 
+                                @for ( $i= 1; $i<=5 ; $i++)
+                                    @if ($i==$tour->rate)
+                                        <input type="radio" disabled checked value="{{$i}}" class="noHover"><i></i>
+                                    @else
+                                        <input type="radio" disabled value="{{$i}}" class="noHover"><i></i>
+                                    @endif
+                                    
+                                @endfor                       
+                            </span>
+                            </div>
                             @if($tour->sales!=0)
-                                <span class="text-decoration-line-through">{{$tour->price}}</span>
+                                <span class="text-decoration-line-through">${{$tour->price}}</span>
                                 <span>${{$tour->price*(100-$tour->sales)/100}}</span>
                             @else
-                            <span>${{$tour->price}}</span>
+                                <span>${{$tour->price}}</span>
                             @endif
                         </div>
-                        <p class="lead">Duration: {{$tour->duration}}</p>
+                        <p class="lead">Duration: {{$tour->duration}} Days</p>
                         <p class="lead">Departure point: {{$tour->province->province}}</p>
                         <p class="lead">Departure time: {{date('d/m/Y',strtotime($tour->departure_date))}}</p>
                         <div class="d-flex">
@@ -166,91 +273,141 @@
                     </div>
                 </div>
             </div>
+
             <div class="container px-4 px-lg-5 my-5">
-                <p class="lead"><h1>Description</h1> 
-                    <div class="textarea">{!!$description!!}</div>
-                </p>
-            </div>
-            <div class="container px-4 px-lg-5 my-5">
-                <p class="lead"><h1>Video</h1> 
-                    <center><video controls class="tour_video">
-                        <source src="{{$tour->video}}" type="video/{{pathinfo($tour->video, PATHINFO_EXTENSION);}}">
-                      Your browser does not support the video tag.
-                    </video></center>
-                </p>
-            </div>
-            <div class="container px-4 px-lg-5 my-5">
-                <p class="lead"><h1>Overview</h1> 
+                <p class="lead"><h2>Overview</h2> 
                     <div class="textarea">{!!$overview!!}</div>
                 </p>
             </div>
 
-        </section>
-        
-    <p><h1 style = "margin-left : 10%;">Rate Tour</h1></p>
-    <div class="cont">
-        <div class="stars">
-            <span>{{Auth::user()->username}}</span>
-            <form action = "/api/addComment" method = "post">
-                @csrf
-                <input type="text" name = "tour_id" hidden value = "{{$tour->id}}">
-                <input class="star star-5" onclick = "commenting()" id="star-5-2" type="radio" name="star" value='5'/>
-                <label class="star star-5" for="star-5-2"></label>
-                <input class="star star-4" onclick = "commenting()" id="star-4-2" type="radio" name="star"value='4'/>
-                <label class="star star-4" for="star-4-2"></label>
-                <input class="star star-3" onclick = "commenting()" id="star-3-2" type="radio" name="star"value='3'/>
-                <label class="star star-3" for="star-3-2"></label>
-                <input class="star star-2" onclick = "commenting()" id="star-2-2" type="radio" name="star"value='2'/>
-                <label class="star star-2" for="star-2-2"></label>
-                <input class="star star-1" onclick = "commenting()" id="star-1-2" type="radio" name="star"value='1'/>
-                <input hidden type = "text" name = "rating" id = "rating"/>
-                <label class="star star-1" for="star-1-2"></label>
-                <div class="rev-box">
-                    <input class="review" onKeyUp= "commenting()" id = "review" col="30" name="content"></input>
-                    <button type="submit">Submit</button>
-                </div>
-           </form>                
-        </div>
-    </div>
-    <br>
-    <p ><h1 style = "margin-left : 10%;">Reviews</h1></p>
-    @foreach($comments as $comment)
-    <div class = "cont">
-        <div class="stars">
-        <div>
-        @php
-        for ($x = $comment->rate; $x >= 1 ; $x--) {
-            echo "<label style = 'color:#FE7;' class='star star-{$x}' for='star-{$x}-2'></label>";
-        }
-        @endphp
-    
-            
-        </div>
-        </div>
-            <p style = "color:black">Name:{{$comment->user->full_name}}</p>
-            <p style = "color:black">Comment:{{$comment->content}}</p>
-            <p>{{$comment->rate}}</p>
-        </div>
-    </div>
-    
-    @endforeach
-        
-        <!-- Related items section-->
-        <section class="py-5 bg-light">
-            <div class="container px-4 px-lg-5 mt-5">
-                @if($Prices->count())
-                <h2 class="fw-bolder mb-4">Other tours</h2>
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    @foreach ($Prices as $i=>$value )
-                        <x-tour-item :tour="$value"/>
+
+            <div class="container px-4 px-lg-5 my-5">
+                <p class="lead"><h2>Highlight:</h2> 
+                <div class="container1">
+                <!-- Flickity HTML init -->
+                <div class="carousel carousel-main" data-flickity='{"pageDots": false }'>
+                    @foreach ($tour->tour_highlights as $highlight )
+                        <div class="carousel-cell"><img src="{{$highlight->highlight}}" width="100%" height="100%"/></div>
                     @endforeach
                 </div>
-                @endif
+                
+                <div class="carousel carousel-nav"
+                data-flickity='{ "asNavFor": ".carousel-main", "contain": true, "pageDots": false }'>
+                @foreach ($tour->tour_highlights as $highlight)
+                    <div class="carousel-cell"><img src="{{$highlight->highlight}}" width="120" height="90"/></div>
+                @endforeach
+                </div>
+                
+                </div><!-- /.container -->
+
+            </div>
+
+            <div class="container px-4 px-lg-5 my-5">
+                <p class="lead"><h2>Description</h2> 
+                    <div class="textarea">{!!$description!!}</div>
+                </p>
+            </div>
+
+            <div class="container px-4 px-lg-5 my-5">
+                <p class="lead"><h2>Video</h2> 
+                    <center>
+                        <video controls class="tour_video" width="50%" height="100%">
+                            <source src="{{$tour->video}}" type="video/{{pathinfo($tour->video, PATHINFO_EXTENSION);}}">
+                            Your browser does not support the video tag.
+                        </video>
+                    </center>
+                </p>
+            </div>
+
+            <div class="rt-container">
+                <div class="col-rt-12">
+                    <div class="Scriptcontent">             
+                    @if(Auth::check())
+                        <div class="container px-4 px-lg-5 my-5">
+                            <p><h3>Rate Tour</h3></p>
+                        </div>
+                        <div class="container px-4 px-lg-5 my-5">
+                            <p>Dear Customer,<br>
+                                Thank you for your faith.
+                                We would like to know how we performed. Please spare some moments to give us
+                                your valuable feedback as it will help us in improving our service.
+                            </p>
+                            <div style="float: left; padding-top:0px">
+                                <img src="{{URL::asset('/img/avatar/avatar.png')}}" alt="Avatar" class="avatar" >
+                            </div>
+                            <form  style="display: inline-block;line-height: 1.25rem" method="POST" action="{{route('comment',['tour_id'=>$tour->id])}}">
+                                @csrf
+                                <label>Rate:</label>
+                                <span class="star-rating">
+                                    <input type="radio" name="rating" value="1" ><i></i>
+                                    <input type="radio" name="rating" value="2" ><i></i>
+                                    <input type="radio" name="rating" value="3" ><i></i>
+                                    <input type="radio" name="rating" value="4"><i></i>
+                                    <input type="radio" name="rating" value="5"><i></i>
+                                </span></br>
+                                <label for="m_3189847521540640526commentText">Comment:</label><br/>
+                                <textarea cols="75" name="content" rows="5" style="width: 100%; resize:none" ></textarea><br>
+                                <div class="clear"></div> 
+                                <input style="background:#43a7d5;color:#fff;padding:12px;border:0" type="submit" value="Submit">&nbsp;
+                            </form>
+                        </div>
+                    @endif  
+                    </div>
+                </div>
+            </div>
+            <div class="container px-4 px-lg-5 my-5">
+                <p><h3>Reviews</h3></p>
+                @foreach ($comments as $comment )
+                <div style="display: block; line-height: 1.25rem; " >
+                    <div style="display:inline-block;">
+                        <img src="{{URL::asset('/img/avatar/avatar.png')}}" alt="Avatar" class="avatar" >
+                    </div>
+                    <div style="display: inline-block;vertical-align: super !important">
+                    @if($comment->rate!=0)
+                    <span class="star-rating"> 
+                            @for ( $i= 1; $i<=5 ; $i++)
+                                @if ($i==$comment->rate)
+                                    <input type="radio" disabled checked value="{{$i}}" class="noHover"><i></i>
+                                @else
+                                    <input type="radio" disabled value="{{$i}}" class="noHover"><i></i>
+                                @endif
+                                
+                            @endfor                       
+                    </span> -
+                    @endif
+                    <span> {{date('h:i d/m/Y',strtotime($comment->time))}} </span></br>
+                    <div >
+                        <div style="display: inline-block;" >{{$comment->user->username}} : </div>
+                        <div  style="display: inline-block;">{{$comment->content}}</div><br>
+                    </div>
+                    </div>
+                </div></br>
+                @endforeach
+                <div style="margin-left: 13%; margin-right: 13%; height:55px "  >
+                    <div style="margin-right: 0px; float:right; margin:10px; margin-right:30px" >
+                       {{$comments->links()}}
+                    </div>
+                 </div>
             </div>
         </section>
-        
+        <!-- Related items section-->
+    <section class="py-5 bg-light">
+        <div class="container px-4 px-lg-5 mt-5">
+            @if($Prices->count())
+            <h2 class="fw-bolder mb-4">Same tours</h2>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                @foreach ($Prices as $i=>$value )
+                    <x-tour-item :tour="$value"/>
+                @endforeach
+            </div>
+            @endif
+        </div>
+    </section>
+    
+        <x-footer/>
         <!-- Footer-->
         @includeIf('partials.scriptjs')
+
         <script>
             function rating(){
                 var count = 0;

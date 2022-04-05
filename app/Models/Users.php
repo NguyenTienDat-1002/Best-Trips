@@ -17,4 +17,8 @@ class Users extends Authenticatable
     public function comments(){
         return $this->hasMany('App\Models\Comment','user_id','id');
     }
+
+    public function booking(){
+        return $this->hasMany('App\Models\Booking', 'user_id', 'id');
+    }
 }

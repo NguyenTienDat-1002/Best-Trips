@@ -53,9 +53,12 @@ Route::middleware('admin')->group(function(){
 
 Route::middleware('customer')->group(function(){
 
-    Route::get('/tour/{id}/book','TourController@book')->name('tour.book');
-    Route::get('/payment/{id}','TourController@payment');
-
+    Route::get('/tour/{id}/book','BookController@create')->name('tour.book');
+    Route::get('/history','BookController@history')->name('history');
+    Route::post('/tour/{id}/book','BookController@preparePayment')->name('preparepayment');
+    Route::post('payment','BookController@payment')->name('payment');
+    Route::post('/Comment/{tour_id}','CommentController@store')->name('comment');
+    
 
 });
 
@@ -63,8 +66,9 @@ Route::get('/tour/{id}', 'TourController@show')->name('tourDetails');
 
 Route::get('/tours','TourController@search');
 
-
-Route::get('/test/{id}', 'testsessionController@test');
+Route::get('/test',function(){
+    return view('history');
+});
 
 Route::get('/result','testsessionController@result');
 

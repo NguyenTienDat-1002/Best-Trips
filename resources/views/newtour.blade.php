@@ -36,12 +36,12 @@
                                             </p>
                                             <p class="w3-third">      
                                                <label class="w3-text-grey" for="price">Price</label>
-                                                    <input class="w3-input w3-border" type="text" id="price" name="price" value="0">
+                                                    <input class="w3-input w3-border" id="price" type="number" min="0" name="price" value="0" required>
                                             </p>
 
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="sale">Sale</label>
-                                                    <input class="w3-input w3-border" type="text" id="sale" name="sale" value="0">
+                                                    <input class="w3-input w3-border" id="sale" type="number" min="0" max="100" name="sale" value="0" required>
                                              </p>
 
                                         </div>
@@ -59,11 +59,11 @@
                                 
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="time">time</label>
-                                                <input class="w3-input w3-border" type="date" id="time" name="time">
+                                                <input class="w3-input w3-border" type="date" id="time" name="time" required>
                                             </p>
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="duration">Duration</label>
-                                                <input class="w3-input w3-border" id="duration" name="duration" type="text" required>
+                                                <input class="w3-input w3-border" id="duration" name="duration" min="0" type="number" required>
                                             </p>
                                         </div>
                                 
@@ -82,7 +82,7 @@
                                         <div class="w3-row-padding" id = "highlight">
                                             <p id="highlight" class="w3-third">      
                                                 <label class="w3-text-grey" ></label>
-                                                <input class="w3-input w3-border" type="file"  name="hightlight[]"/>
+                                                <input class="w3-input w3-border" type="file"  name="hightlight[]" />
                                             </p>
                                             <p id="highlight" class="w3-third">      
                                                 <label class="w3-text-grey" >High light</label>

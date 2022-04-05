@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use App\Models\Province;
+use App\Models\Comment;
+use App\Models\Tour_Highlight;
 
 class TourController extends Controller
 {
@@ -66,10 +68,26 @@ class TourController extends Controller
                 'img'=>'http://127.0.0.1:8000/storage/'.$request->file('img')->storeAs('tours/img', $tour->id.'.'.$request->file('img')->getClientOriginalExtension(), 'public'),
                 'video'=>'http://127.0.0.1:8000/storage/'.$request->file('video')->storeAs('tours/video', $tour->id.'.'.$request->file('video')->getClientOriginalExtension(), 'public'),
             ]);
+
+            $highlights=$request->file('hightlight');
+
+            if(isset($highlights)){
+                for($i=0;$i<count($highlights);$i++) {
+                    if(isset($highlights[$i])){
+                        $temp=Tour_Highlight::create([
+                            'tour_id'=>$tour->id,
+                        ]);
+                        $temp->update([
+                            'highlight'=>'http://127.0.0.1:8000/storage/'.$highlights[$i]->storeAs('tours/highlights', $temp->id.'.'.$highlights[$i]->getClientOriginalExtension(), 'public')
+                        ]);
+                    }
+                }
+            }
+            
     
             DB::commit();
 
-            return redirect()->back();
+            return redirect(route('tourDetails',['id'=>$tour->id]));
 
         }catch(e){
             DB::rollback();
@@ -96,8 +114,9 @@ class TourController extends Controller
 
         $overview=Storage::disk('local')->get($tour->overview);
         $description=Storage::disk('local')->get($tour->description);
-        $comments=$tour->comments;
-         return view('tourdetails', ['tour' => $tour, 'Prices' => $Prices, 
+        $comments=Comment::where('tour_id',$tour->id)->orderBy('time','DESC')->paginate();
+        
+        return view('tourdetails', ['tour' => $tour, 'Prices' => $Prices, 
                      'overview'=>str_replace("\n",'<br>',$overview), 
                      'comments'=> $comments,
                      'description'=>str_replace("\n",'<br>',$description)]);
@@ -116,8 +135,9 @@ class TourController extends Controller
         
         $overview=Storage::disk('local')->get($tour->overview);
         $description=Storage::disk('local')->get($tour->description);
-
+        
         $provinces=Province::all();
+        
         return view('editTour')->with(['tour' => $tour, 
         'overview'=>str_replace("\n",'<br>',$overview), 
         'description'=>str_replace("\n",'<br>',$description),
@@ -168,6 +188,10 @@ class TourController extends Controller
     public function destroy($id)
     {
         //
+        $highlights=Tour_Highlight::where('tour_id',$id);
+        $highlights->delete();
+        $comments = Comment::where('tour_id',$id);
+        $comments->delete();
         $tour = Tour::where('id',$id);
         $tour->delete();
         return redirect(url('/tours'));
@@ -183,15 +207,11 @@ class TourController extends Controller
         if($request->province)
             $tours->where('departure_point',$request->province);
         //dd($request);
-        return view('tours',['tours'=> $tours->paginate(),'provinces'=>$provinces]);
+        return view('tours',['tours'=> $tours->paginate(12),'provinces'=>$provinces]);
 
     }
 
-    public function book($id){
-        $tour=Tour::where('id', $id)->get();
 
-        return view('booking',['tour'=>$tour[0]]);
-    }
     
     public function payment(Request $request){
         return view('payment');

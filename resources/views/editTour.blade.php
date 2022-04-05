@@ -32,16 +32,16 @@
                                         <div class="w3-row-padding">
                                             <p class="w3-third">
                                             <label class="w3-text-grey" for="title">Title</label>
-                                              <input class="w3-input w3-border" type="text" id="title" name="title" value={{$tour->title}} required>
+                                              <input class="w3-input w3-border" type="text" id="title" name="title" value="{{$tour->title}}" required>
                                             </p>
                                             <p class="w3-third">      
                                                <label class="w3-text-grey" for="price">Price</label>
-                                                    <input class="w3-input w3-border" type="text" id="price" name="price" value="{{$tour->price}}">
+                                                    <input class="w3-input w3-border" type="number" min="0" id="price" name="price" value="{{$tour->price}}" required>
                                             </p>
 
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="sale">Sale</label>
-                                                    <input class="w3-input w3-border" type="text" id="sale" name="sale" value="{{$tour->sales}}">
+                                                    <input class="w3-input w3-border" type="number" min="0" max="100" id="sale" name="sale" value="{{$tour->sales}}" required>
                                              </p>
 
                                         </div>
@@ -64,11 +64,11 @@
                                 
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="time">time</label>
-                                                <input class="w3-input w3-border" type="date" id="time" name="time" value="{{$tour->departure_date}}">
+                                                <input class="w3-input w3-border" type="date" id="time" name="time" value="{{$tour->departure_date}}" required>
                                             </p>
                                             <p class="w3-third">      
                                                 <label class="w3-text-grey" for="duration">Duration</label>
-                                                <input class="w3-input w3-border" id="duration" name="duration" type="text" value="{{$tour->duration}}" required>
+                                                <input class="w3-input w3-border" id="duration" name="duration" type="number" min="0" value="{{$tour->duration}}" required>
                                             </p>
                                         </div>
                                 
