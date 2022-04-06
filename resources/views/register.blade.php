@@ -69,7 +69,10 @@
 						<input class="input100" type="password" name="repassword" >
 						<span class="focus-input100"></span>
 					</div>
-
+					@php
+					if($errors->any())
+					  echo '<center><p style="color:red">'.$errors->first().'</p></center>';
+					@endphp
 					<div class="container-login100-form-btn m-t-17">
 						<button class="login100-form-btn" type="submit">
 							Register
