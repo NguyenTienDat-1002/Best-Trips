@@ -70,11 +70,11 @@
                                         <div class="w3-row-padding">
                                             <p class="w3-half">
                                                 <label class="w3-text-grey" for="img">Tour image</label>
-                                                <input class="w3-input w3-border" type="file" id="img" name="img">
+                                                <input class="w3-input w3-border" type="file" id="img" name="img" required>
                                             </p>
                                             <p class="w3-half">
                                                 <label class="w3-text-grey" for="video">Tour video</label>
-                                                <input class="w3-input w3-border" type="file" id="video" name="video">
+                                                <input class="w3-input w3-border" type="file" id="video" name="video" required>
                                             </p>
                                         </div>
                                         
